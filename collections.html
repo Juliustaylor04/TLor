@@ -2,321 +2,1453 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Collections | TLor Luxury Perfumes</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        *{margin:0;padding:0;box-sizing:border-box}
-        :root{
-            --gold:#d4a84b;--gold-light:#f0d9a0;--gold-dark:#996515;
-            --midnight-blue:#1a2332;--deep-navy:#0f1621;--slate-gray:#2c3e50;
-            --warm-white:#f5f1eb;--muted-text:#b8c4d0;
+        /* ===== CSS RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        html{scrollbar-width:thin;scrollbar-color:var(--gold) var(--midnight-blue)}
-        body{
-            font-family:'Montserrat',sans-serif;background:var(--deep-navy);
-            color:var(--warm-white);overflow-x:hidden;line-height:1.6;
-            -webkit-text-size-adjust:100%;touch-action:manipulation;
-        }
-        ::-webkit-scrollbar{width:8px}
-        ::-webkit-scrollbar-track{background:var(--midnight-blue)}
-        ::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--gold),var(--gold-dark));border-radius:4px}
 
-        .preloader{
-            position:fixed;inset:0;
-            background:radial-gradient(ellipse at center,var(--midnight-blue),var(--deep-navy));
-            display:flex;flex-direction:column;align-items:center;justify-content:center;
-            z-index:99999;transition:opacity .5s ease,visibility .5s ease;
+        :root {
+            --gold: #d4a84b;
+            --gold-light: #f0d9a0;
+            --gold-dark: #996515;
+            --midnight-blue: #1a2332;
+            --deep-navy: #0f1621;
+            --slate-gray: #2c3e50;
+            --warm-white: #f5f1eb;
+            --soft-cream: #ebe4d8;
+            --copper: #b87333;
+            --amber: #ffbf00;
+            --muted-text: #b8c4d0;
         }
-        .preloader.hide{opacity:0;visibility:hidden;pointer-events:none}
-        .preloader-logo{font-family:'Cormorant Garamond',serif;font-size:4rem;font-weight:300;letter-spacing:15px;color:var(--gold);margin-bottom:30px}
-        .preloader-bar{width:200px;height:2px;background:rgba(255,255,255,.1);border-radius:2px;overflow:hidden}
-        .preloader-fill{height:100%;width:0;background:var(--gold);animation:fillBar 1s ease forwards}
-        @keyframes fillBar{to{width:100%}}
-        .preloader-sub{margin-top:18px;font-size:.7rem;letter-spacing:5px;text-transform:uppercase;color:rgba(255,255,255,.35)}
 
-        nav{
-            position:fixed;top:0;left:0;right:0;width:100%;
-            padding:20px 24px;display:flex;justify-content:space-between;align-items:center;
-            z-index:10000;
-            transition:background .3s ease,box-shadow .3s ease;
+        html {
+            scroll-behavior: smooth;
+            scrollbar-width: thin;
+            scrollbar-color: var(--gold) var(--midnight-blue);
         }
-        nav.scrolled{background:rgba(15,22,33,.96);box-shadow:0 4px 30px rgba(0,0,0,.4)}
-        .nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:400;letter-spacing:8px;color:var(--gold);text-decoration:none;flex-shrink:0}
-        .nav-links{display:flex;gap:36px;list-style:none;align-items:center}
-        .nav-links a{
-            color:var(--warm-white);text-decoration:none;font-size:.78rem;font-weight:400;
-            letter-spacing:3px;text-transform:uppercase;padding:6px 0;
-            transition:color .3s ease;white-space:nowrap;
-        }
-        .nav-links a:hover,.nav-links a.active{color:var(--gold)}
 
-        .menu-toggle{
-            display:none;flex-direction:column;justify-content:center;align-items:center;
-            width:42px;height:42px;cursor:pointer;z-index:10002;
-            background:none;border:1px solid rgba(212,168,75,.2);border-radius:8px;
-            padding:0;flex-shrink:0;
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--deep-navy);
+            color: var(--warm-white);
+            overflow-x: hidden;
+            cursor: default;
+            line-height: 1.6;
         }
-        .menu-toggle span{width:20px;height:2px;background:var(--gold);display:block;border-radius:2px;transition:all .3s ease}
-        .menu-toggle.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
-        .menu-toggle.active span:nth-child(2){opacity:0}
-        .menu-toggle.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
 
-        .mobile-menu{
-             display:none;position:fixed;inset:0;width:100%;height:100%;
-             background:rgba(15,22,33,.98);z-index:9999;
-            flex-direction:column;align-items:center;justify-content:center;gap:40px;
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--midnight-blue); }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--gold), var(--gold-dark));
+            border-radius: 5px;
         }
-        .mobile-menu.open{display:flex}
-        .mobile-menu a{
-            color:var(--warm-white);text-decoration:none;font-size:1.2rem;
-            font-weight:400;letter-spacing:5px;text-transform:uppercase;
-            transition:color .2s ease;
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, var(--gold-light), var(--gold));
         }
-        .mobile-menu a:hover,.mobile-menu a.active{color:var(--gold)}
 
-        .collections-hero{
-            min-height:45vh;display:flex;flex-direction:column;align-items:center;
-            justify-content:center;position:relative;padding:140px 30px 70px;text-align:center;
+        /* ===== PRELOADER ===== */
+        .preloader {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: radial-gradient(ellipse at center, var(--midnight-blue) 0%, var(--deep-navy) 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999;
+            transition: opacity 1s ease, visibility 1s ease;
         }
-        .hero-orb{position:absolute;border-radius:50%;filter:blur(100px);opacity:.25;pointer-events:none}
-        .hero-orb-1{width:400px;height:400px;background:rgba(212,168,75,.3);top:-15%;right:-5%}
-        .hero-orb-2{width:350px;height:350px;background:rgba(44,62,80,.5);bottom:-15%;left:-5%}
-        .grid-overlay{
-            position:absolute;inset:0;pointer-events:none;
-            background-image:linear-gradient(rgba(212,168,75,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(212,168,75,.03) 1px,transparent 1px);
-            background-size:80px 80px;
-            mask-image:radial-gradient(ellipse at center,black 20%,transparent 70%);
+        .preloader.fade-out { opacity: 0; visibility: hidden; }
+
+        .preloader-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 5rem;
+            font-weight: 300;
+            letter-spacing: 15px;
+            color: var(--gold);
+            text-shadow: 0 0 60px rgba(212,168,75,0.5);
+            animation: logoPulse 2s ease-in-out infinite;
+            margin-bottom: 40px;
         }
-        .collections-hero-content{position:relative;z-index:10;max-width:850px}
-        .collections-tag{display:inline-block;font-size:.72rem;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:22px;padding:0 28px;position:relative}
-        .collections-tag::before,.collections-tag::after{content:'';position:absolute;top:50%;width:28px;height:1px;background:linear-gradient(90deg,transparent,var(--gold))}
-        .collections-tag::before{left:0}
-        .collections-tag::after{right:0;background:linear-gradient(90deg,var(--gold),transparent)}
-        .collections-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,6vw,4.2rem);font-weight:300;letter-spacing:-.5px;margin-bottom:22px;line-height:1.1}
-        .collections-subtitle{font-size:1rem;color:var(--muted-text);font-weight:300;line-height:1.8;max-width:600px;margin:0 auto 40px}
 
-        .search-container{width:100%;max-width:560px;margin:0 auto}
-        .search-wrapper{display:flex;align-items:center;background:rgba(26,35,50,.7);border:1px solid rgba(212,168,75,.15);border-radius:60px;padding:7px 7px 7px 24px;transition:border-color .3s ease}
-        .search-wrapper:focus-within{border-color:var(--gold)}
-        .search-icon{color:var(--gold);font-size:1rem;margin-right:12px;pointer-events:none}
-        .search-input{flex:1;background:transparent;border:none;outline:none;color:var(--warm-white);font-family:'Montserrat',sans-serif;font-size:16px;font-weight:300}
-        .search-input::placeholder{color:var(--muted-text);font-style:italic}
-        .search-clear{background:none;border:none;color:var(--muted-text);cursor:pointer;font-size:1.2rem;padding:5px 10px;opacity:0;transition:opacity .2s ease}
-        .search-clear.visible{opacity:1}
-        .search-clear:hover{color:var(--gold)}
-        .results-count{text-align:center;margin-top:16px;font-size:.8rem;color:var(--muted-text);min-height:22px}
-        .results-count span{color:var(--gold);font-weight:500}
-
-        .category-section{padding:50px 30px 30px}
-        .category-tabs{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;max-width:1100px;margin:0 auto}
-        .category-tab{
-            padding:13px 30px;background:transparent;border:1px solid rgba(212,168,75,.15);
-            border-radius:50px;color:var(--warm-white);font-family:'Montserrat',sans-serif;
-            font-size:.78rem;font-weight:400;letter-spacing:2px;text-transform:uppercase;
-            cursor:pointer;transition:all .3s ease;
+        @keyframes logoPulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; filter: brightness(1); }
+            50% { transform: scale(1.05); opacity: 1; filter: brightness(1.3); }
         }
-        .category-tab:hover{border-color:var(--gold);color:var(--gold)}
-        .category-tab.active{background:linear-gradient(135deg,var(--gold),var(--gold-dark));border-color:var(--gold);color:var(--deep-navy);font-weight:600}
-        .tab-count{font-size:.72rem;opacity:.8}
 
-        .products-section{padding:30px 30px 80px}
-        .products-grid{display:grid;grid-template-columns:1fr;gap:30px;max-width:600px;margin:0 auto}
-        .product-card{
-            position:relative;
-            background:linear-gradient(145deg,rgba(26,35,50,.8),rgba(15,22,33,.95));
-            border:1px solid rgba(212,168,75,.1);border-radius:20px;
-            padding:28px 22px 26px;text-align:center;
-            transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease;
+        .preloader-line {
+            width: 280px; height: 2px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 2px;
+            overflow: hidden;
+            position: relative;
         }
-        .product-card:hover{transform:translateY(-8px);border-color:rgba(212,168,75,.35);box-shadow:0 20px 50px rgba(0,0,0,.4)}
-        .product-card.hidden{display:none}
-        .product-badge{position:absolute;top:14px;right:14px;padding:5px 12px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--deep-navy);font-size:.6rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;border-radius:20px;z-index:5}
-        .product-badge.sale{background:linear-gradient(135deg,#e74c3c,#c0392b)}
-        .product-badge.new{background:linear-gradient(135deg,#27ae60,#1e8449)}
-        .product-image-wrapper{position:relative;height:280px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;border-radius:12px;background:rgba(15,22,33,.5);overflow:hidden}
-        .product-image-wrapper img{width:80%;height:80%;object-fit:contain;transition:transform .3s ease;filter:drop-shadow(0 8px 20px rgba(0,0,0,.3))}
-        .product-card:hover .product-image-wrapper img{transform:scale(1.08)}
-        .product-category-tag{font-size:.65rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;font-weight:500;opacity:.85}
-        .product-name{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:500;margin-bottom:8px;letter-spacing:.5px;line-height:1.2;transition:color .3s ease}
-        .product-card:hover .product-name{color:var(--gold)}
-        .product-brand{font-size:.78rem;color:var(--muted-text);margin-bottom:10px;font-weight:300;letter-spacing:1px}
-        .product-notes{font-size:.75rem;color:var(--slate-gray);letter-spacing:1px;font-weight:300;font-style:italic;margin-bottom:14px;line-height:1.5}
-        .product-price{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;color:var(--gold);margin-bottom:16px}
-        .product-price .original-price{font-size:.95rem;color:var(--muted-text);text-decoration:line-through;margin-left:8px;font-weight:400;opacity:.7}
 
-        .btn-add-cart{
-            display:inline-flex;align-items:center;justify-content:center;gap:8px;
-            width:100%;padding:12px 20px;background:transparent;
-            border:1.5px solid var(--gold);border-radius:50px;color:var(--gold);
-            font-family:'Montserrat',sans-serif;font-size:.75rem;font-weight:500;
-            letter-spacing:2px;text-transform:uppercase;cursor:pointer;
-            transition:all .3s ease;position:relative;overflow:hidden;
+        .preloader-progress {
+            position: absolute;
+            left: 0; top: 0;
+            height: 100%; width: 0%;
+            background: linear-gradient(90deg, transparent, var(--gold), var(--gold-light), var(--gold));
+            animation: loadProgress 2.5s ease-in-out forwards;
+            box-shadow: 0 0 20px var(--gold);
         }
-        .btn-add-cart::before{
-            content:'';position:absolute;inset:0;
-            background:linear-gradient(135deg,var(--gold),var(--gold-dark));
-            transform:scaleX(0);transform-origin:left;transition:transform .3s ease;z-index:-1;
+
+        @keyframes loadProgress {
+            0% { width: 0%; }
+            50% { width: 70%; }
+            100% { width: 100%; }
         }
-        .btn-add-cart:hover{color:var(--deep-navy)}
-        .btn-add-cart:hover::before{transform:scaleX(1)}
-        .btn-add-cart:active{transform:scale(.97)}
-        .btn-add-cart.in-cart{background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--deep-navy);border-color:var(--gold);font-weight:600}
 
-        .no-results{grid-column:1/-1;text-align:center;padding:70px 20px;display:none}
-        .no-results.visible{display:block}
-        .no-results-icon{font-size:3.5rem;margin-bottom:20px;opacity:.3}
-        .no-results h3{font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:var(--gold);margin-bottom:12px}
-        .no-results p{color:var(--muted-text);font-size:.95rem}
-
-        .consultation-section{padding:80px 30px;position:relative;background:linear-gradient(180deg,var(--deep-navy),var(--midnight-blue),var(--deep-navy));overflow:hidden}
-        .consultation-container{max-width:1300px;margin:0 auto}
-        .consultation-header{text-align:center;margin-bottom:50px;position:relative;z-index:10}
-        .consultation-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 20px;background:rgba(212,168,75,.08);border:1px solid rgba(212,168,75,.25);border-radius:50px;font-size:.72rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:22px;font-weight:500}
-        .consultation-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:300;line-height:1.15;margin-bottom:18px}
-        .consultation-text{font-size:1rem;line-height:1.8;color:var(--muted-text);margin-bottom:30px;font-weight:300;max-width:600px;margin-left:auto;margin-right:auto}
-        .btn-consultation{display:inline-flex;align-items:center;gap:12px;padding:18px 38px;background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;text-decoration:none;font-size:.82rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;border:none;border-radius:60px;cursor:pointer;transition:all .3s ease;box-shadow:0 10px 35px rgba(37,211,102,.25)}
-        .btn-consultation:hover{transform:translateY(-4px);box-shadow:0 15px 45px rgba(37,211,102,.35)}
-        .btn-consultation svg{width:20px;height:20px;fill:#fff}
-
-        .limited-showcase{display:grid;grid-template-columns:1fr;gap:28px;margin-top:40px}
-        .limited-product-card{
-            position:relative;
-            background:linear-gradient(145deg,rgba(26,35,50,.9),rgba(15,22,33,.95));
-            border:1px solid rgba(212,168,75,.25);border-radius:20px;
-            padding:25px 22px;text-align:center;transition:all .3s ease;
+        .preloader-text {
+            margin-top: 25px;
+            font-size: 0.75rem;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.4);
+            font-weight: 300;
         }
-        .limited-product-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),var(--gold-light),var(--gold))}
-        .limited-product-card:hover{transform:translateY(-8px);border-color:var(--gold);box-shadow:0 20px 50px rgba(0,0,0,.4)}
-        .limited-badge{display:inline-block;padding:5px 14px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--deep-navy);font-size:.6rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;border-radius:20px;margin-bottom:16px}
-        .limited-image-wrapper{position:relative;height:200px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;border-radius:12px;background:rgba(15,22,33,.6);overflow:hidden}
-        .limited-image-wrapper img{width:75%;height:75%;object-fit:contain;transition:transform .3s ease;filter:drop-shadow(0 6px 15px rgba(0,0,0,.4))}
-        .limited-product-card:hover .limited-image-wrapper img{transform:scale(1.08)}
-        .limited-product-name{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:500;color:var(--warm-white);margin-bottom:6px;transition:color .3s ease}
-        .limited-product-card:hover .limited-product-name{color:var(--gold)}
-        .limited-product-brand{font-size:.72rem;color:var(--muted-text);margin-bottom:10px;font-weight:300;letter-spacing:1px}
-        .limited-product-price{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:var(--gold);margin-bottom:16px}
-        .btn-limited-cart{
-            display:inline-flex;align-items:center;justify-content:center;gap:8px;
-            width:100%;padding:12px 20px;background:transparent;
-            border:1.5px solid var(--gold);border-radius:50px;color:var(--gold);
-            font-family:'Montserrat',sans-serif;font-size:.75rem;font-weight:500;
-            letter-spacing:2px;text-transform:uppercase;cursor:pointer;
-            transition:all .3s ease;position:relative;overflow:hidden;
+
+        .preloader-subtext {
+            margin-top: 10px;
+            font-size: 0.65rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--gold);
+            opacity: 0.7;
+            font-weight: 400;
         }
-        .btn-limited-cart::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--gold),var(--gold-dark));transform:scaleX(0);transform-origin:left;transition:transform .3s ease;z-index:-1}
-        .btn-limited-cart:hover{color:var(--deep-navy)}
-        .btn-limited-cart:hover::before{transform:scaleX(1)}
-        .btn-limited-cart.in-cart{background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--deep-navy);border-color:var(--gold);font-weight:600}
 
-        .minimal-footer{padding:30px;text-align:center;border-top:1px solid rgba(212,168,75,.06)}
-        .copyright{color:var(--muted-text);font-size:.8rem;font-weight:300;letter-spacing:.5px}
-
-        .cart-fab{
-            position:fixed;bottom:28px;right:28px;width:58px;height:58px;border-radius:50%;
-            background:linear-gradient(135deg,var(--gold),var(--gold-dark));border:none;
-            cursor:pointer;z-index:9998;display:flex;align-items:center;justify-content:center;
-            box-shadow:0 6px 25px rgba(212,168,75,.35);
-            transition:transform .3s ease;transform:scale(0);opacity:0;
+         /* ===== NAVIGATION ===== */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            padding: 22px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10000;
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            max-width: 100vw;
+            overflow: visible;
         }
-        .cart-fab.visible{transform:scale(1);opacity:1}
-        .cart-fab:hover{transform:scale(1.08)}
-        .cart-fab svg{width:24px;height:24px;fill:var(--deep-navy)}
-        .cart-badge{position:absolute;top:-3px;right:-3px;min-width:20px;height:20px;border-radius:10px;background:#e74c3c;color:#fff;font-size:.65rem;font-weight:700;display:flex;align-items:center;justify-content:center;padding:0 4px;border:2px solid var(--deep-navy)}
-        .cart-badge.pop{animation:bpop .3s ease}
-        @keyframes bpop{50%{transform:scale(1.4)}}
-
-        .cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9999;opacity:0;visibility:hidden;transition:all .3s ease}
-        .cart-overlay.open{opacity:1;visibility:visible}
-        .cart-panel{position:fixed;top:0;right:0;width:400px;max-width:90vw;height:100vh;height:100dvh;background:var(--deep-navy);border-left:1px solid rgba(212,168,75,.12);z-index:10000;transform:translateX(100%);transition:transform .3s ease;display:flex;flex-direction:column}
-        .cart-panel.open{transform:translateX(0)}
-        .cart-panel-header{padding:24px 22px 16px;border-bottom:1px solid rgba(212,168,75,.08);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
-        .cart-panel-title{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:500;color:var(--gold);letter-spacing:1px}
-        .cart-panel-title span{font-family:'Montserrat',sans-serif;font-size:.72rem;color:var(--muted-text);font-weight:400;margin-left:6px}
-        .cart-close{width:36px;height:36px;border-radius:50%;border:1px solid rgba(212,168,75,.15);background:none;color:var(--muted-text);font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s ease}
-        .cart-close:hover{border-color:var(--gold);color:var(--gold)}
-        .cart-items-list{flex:1;overflow-y:auto;padding:12px 22px}
-        .cart-items-list::-webkit-scrollbar{width:3px}
-        .cart-items-list::-webkit-scrollbar-thumb{background:rgba(212,168,75,.25);border-radius:3px}
-        .cart-empty{text-align:center;padding:40px 10px}
-        .cart-empty-icon{font-size:2.5rem;margin-bottom:12px;opacity:.3}
-        .cart-empty p{color:var(--muted-text);font-size:.85rem;font-weight:300}
-        .cart-item{display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid rgba(212,168,75,.05)}
-        .cart-item-img{width:55px;height:55px;border-radius:10px;object-fit:cover;flex-shrink:0;background:rgba(26,35,50,.6)}
-        .cart-item-info{flex:1;min-width:0}
-        .cart-item-name{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:500;color:var(--warm-white);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-        .cart-item-brand{font-size:.65rem;color:var(--muted-text);font-weight:300}
-        .cart-item-price{font-family:'Cormorant Garamond',serif;font-size:.95rem;font-weight:600;color:var(--gold);margin-top:2px}
-        .cart-item-actions{display:flex;align-items:center;gap:6px;flex-shrink:0}
-        .qty-btn{width:26px;height:26px;border-radius:50%;border:1px solid rgba(212,168,75,.2);background:none;color:var(--gold);font-size:.9rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s ease;line-height:1}
-        .qty-btn:hover{background:rgba(212,168,75,.12);border-color:var(--gold)}
-        .qty-num{font-size:.8rem;font-weight:500;color:var(--warm-white);min-width:18px;text-align:center}
-        .cart-item-remove{background:none;border:none;color:var(--muted-text);cursor:pointer;font-size:.8rem;padding:4px;transition:color .2s ease;margin-left:2px}
-        .cart-item-remove:hover{color:#e74c3c}
-
-        .cart-panel-footer{padding:18px 22px 22px;border-top:1px solid rgba(212,168,75,.08);flex-shrink:0}
-        .cart-total{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px}
-        .cart-total-label{font-size:.8rem;color:var(--muted-text);font-weight:400;letter-spacing:1px;text-transform:uppercase}
-        .cart-total-value{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:600;color:var(--gold)}
-        .cart-form{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
-        .cart-form input,.cart-form textarea{width:100%;padding:11px 14px;background:rgba(26,35,50,.7);border:1px solid rgba(212,168,75,.12);border-radius:10px;color:var(--warm-white);font-family:'Montserrat',sans-serif;font-size:16px;font-weight:300;outline:none;transition:border-color .2s ease}
-        .cart-form input::placeholder,.cart-form textarea::placeholder{color:var(--muted-text);font-style:italic}
-        .cart-form input:focus,.cart-form textarea:focus{border-color:var(--gold)}
-        .cart-form textarea{resize:none;height:55px}
-        .cart-form input.error,.cart-form textarea.error{border-color:#e74c3c}
-        .form-error-msg{font-size:.68rem;color:#e74c3c;margin-top:-4px;display:none}
-        .form-error-msg.show{display:block}
-        .btn-checkout{width:100%;padding:14px 20px;background:linear-gradient(135deg,#25D366,#128C7E);border:none;border-radius:50px;color:#fff;font-family:'Montserrat',sans-serif;font-size:.82rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:all .3s ease;display:flex;align-items:center;justify-content:center;gap:10px}
-        .btn-checkout:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(37,211,102,.3)}
-        .btn-checkout:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none}
-        .btn-checkout svg{width:18px;height:18px;fill:#fff}
-        .cart-pay-note{text-align:center;font-size:.65rem;color:var(--muted-text);margin-top:8px;font-weight:300;letter-spacing:.5px}
-        .cart-pay-note span{color:var(--gold);font-weight:500}
-
-        .popup-notice{position:fixed;bottom:100px;right:28px;max-width:320px;background:var(--midnight-blue);border:1px solid rgba(212,168,75,.3);border-radius:16px;padding:16px 20px;z-index:9998;box-shadow:0 10px 40px rgba(0,0,0,.5);transform:translateY(20px);opacity:0;visibility:hidden;transition:all .4s ease;pointer-events:none}
-        .popup-notice.show{transform:translateY(0);opacity:1;visibility:visible;pointer-events:auto}
-        .popup-notice p{font-size:.78rem;color:var(--warm-white);line-height:1.5;font-weight:300}
-        .popup-notice p span{color:var(--gold);font-weight:500}
-        .popup-notice-close{position:absolute;top:8px;right:10px;background:none;border:none;color:var(--muted-text);cursor:pointer;font-size:1rem;line-height:1}
-        .popup-notice-close:hover{color:var(--gold)}
-
-        @media(min-width:950px){
-            .products-grid{grid-template-columns:repeat(2,1fr);max-width:900px}
+        nav.scrolled {
+            padding: 14px 24px;
+            background: rgba(15,22,33,0.97);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            box-shadow: 0 8px 40px rgba(0,0,0,0.5);
         }
-        @media(min-width:1250px){
-            .products-grid{grid-template-columns:repeat(3,1fr);max-width:1200px}
+
+        .nav-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 400;
+            letter-spacing: 8px;
+            color: var(--gold);
+            text-decoration: none;
+            position: relative;
+            transition: all 0.4s ease;
+            flex-shrink: 0;
+            line-height: 1;
         }
-        @media(min-width:1024px){
-            .limited-showcase{grid-template-columns:repeat(3,1fr)}
+        .nav-logo::after {
+            content: '';
+            position: absolute;
+            bottom: -4px; left: 0;
+            width: 100%; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
         }
-        @media(max-width:768px){
-            nav{padding:18px 20px}
-            .nav-links{display:none}
-            .menu-toggle{display:flex}
-            .collections-hero{padding:120px 20px 60px}
-            .category-section{padding:40px 20px 25px}
-            .category-tabs{gap:10px}
-            .category-tab{padding:10px 20px;font-size:.68rem;letter-spacing:1.5px}
-            .products-section{padding:25px 20px 70px}
-            .product-image-wrapper{height:240px}
-            .consultation-section{padding:60px 20px}
-            .cart-fab{bottom:18px;right:18px;width:52px;height:52px}
-            .cart-panel{width:100vw;max-width:100vw}
-            .popup-notice{right:16px;left:16px;bottom:85px;max-width:none}
+        .nav-logo:hover::after { transform: scaleX(1); }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+            align-items: center;
+        }
+        .nav-links a {
+            color: var(--warm-white);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 400;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            position: relative;
+            padding: 6px 0;
+            transition: all 0.4s ease;
+            white-space: nowrap;
+        }
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 0; height: 1px;
+            background: var(--gold);
+            transition: width 0.4s ease;
+        }
+        .nav-links a:hover {
+            color: var(--gold);
+            letter-spacing: 5px;
+        }
+        .nav-links a:hover::before { width: 100%; }
+        .nav-links a.active { color: var(--gold); }
+        .nav-links a.active::before { width: 100%; }
+
+        /* Hamburger Button */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 44px;
+            height: 44px;
+            cursor: pointer;
+            z-index: 10002;
+            background: none;
+            border: 1px solid rgba(212,168,75,0.2);
+            border-radius: 8px;
+            padding: 0;
+            flex-shrink: 0;
+            transition: border-color 0.3s ease;
+        }
+        .menu-toggle:hover { border-color: rgba(212,168,75,0.5); }
+        .menu-toggle span {
+            width: 22px; height: 2px;
+            background: var(--gold);
+            transition: all 0.4s ease;
+            display: block;
+            border-radius: 2px;
+        }
+        .menu-toggle.active { border-color: rgba(212,168,75,0.5); }
+        .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .menu-toggle.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+        .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+        /* Fullscreen Mobile Menu */
+        .nav-links.mobile-active {
+            display: flex !important;
+            flex-direction: column;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh;
+            background: rgba(15, 22, 33, 0.98);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            justify-content: center;
+            align-items: center;
+            gap: 45px;
+            padding: 100px 30px 60px;
+            animation: slideInMenu 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            z-index: 10001;
+            overflow-y: auto;
+        }
+        @keyframes slideInMenu {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .nav-links.mobile-active a {
+            font-size: 1.3rem;
+            letter-spacing: 5px;
+            padding: 12px 0;
+        }
+
+        /* ===== HERO SECTION ===== */
+        .collections-hero {
+            min-height: 50vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 160px 70px 80px;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .collections-hero-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+
+        .hero-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.3;
+        }
+
+        .hero-orb-1 {
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(212,168,75,0.3) 0%, transparent 70%);
+            top: -20%; right: -10%;
+            animation: orbFloat 15s ease-in-out infinite;
+        }
+
+        .hero-orb-2 {
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(44,62,80,0.6) 0%, transparent 70%);
+            bottom: -20%; left: -10%;
+            animation: orbFloat 18s ease-in-out infinite reverse;
+        }
+
+        @keyframes orbFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(40px, -60px) scale(1.1); }
+        }
+
+        .grid-overlay {
+            position: absolute;
+            inset: 0;
+            background-image: 
+                linear-gradient(rgba(212,168,75,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(212,168,75,0.03) 1px, transparent 1px);
+            background-size: 80px 80px;
+            mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+        }
+
+        .collections-hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 900px;
+        }
+
+        .collections-tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 25px;
+            position: relative;
+            padding: 0 30px;
+        }
+
+        .collections-tag::before,
+        .collections-tag::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 30px; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold));
+        }
+        .collections-tag::before { left: 0; }
+        .collections-tag::after { right: 0; background: linear-gradient(90deg, var(--gold), transparent); }
+
+        .collections-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4.5rem;
+            font-weight: 300;
+            letter-spacing: -0.5px;
+            margin-bottom: 25px;
+            line-height: 1.1;
+        }
+
+        .collections-subtitle {
+            font-size: 1.1rem;
+            color: var(--muted-text);
+            font-weight: 300;
+            line-height: 1.8;
+            max-width: 650px;
+            margin: 0 auto 45px;
+        }
+
+        /* ===== SEARCH BAR ===== */
+        .search-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .search-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            background: rgba(26,35,50,0.7);
+            border: 1px solid rgba(212,168,75,0.2);
+            border-radius: 60px;
+            padding: 8px 8px 8px 28px;
+            backdrop-filter: blur(20px);
+            transition: all 0.4s ease;
+        }
+
+        .search-wrapper:focus-within {
+            border-color: var(--gold);
+            box-shadow: 0 0 30px rgba(212,168,75,0.2);
+        }
+
+        .search-icon {
+            color: var(--gold);
+            font-size: 1.2rem;
+            margin-right: 15px;
+            pointer-events: none;
+        }
+
+        .search-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: var(--warm-white);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        .search-input::placeholder { color: var(--muted-text); font-style: italic; }
+
+        .search-clear {
+            background: none;
+            border: none;
+            color: var(--muted-text);
+            cursor: pointer;
+            font-size: 1.3rem;
+            padding: 5px 12px;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        .search-clear.visible { opacity: 1; }
+        .search-clear:hover { color: var(--gold); }
+
+        .results-count {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.85rem;
+            color: var(--muted-text);
+            letter-spacing: 1px;
+            min-height: 24px;
+        }
+        .results-count span { color: var(--gold); font-weight: 500; }
+
+        /* ===== CATEGORY TABS ===== */
+        .category-section {
+            padding: 60px 70px 40px;
+            position: relative;
+        }
+
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .category-tab {
+            padding: 16px 38px;
+            background: transparent;
+            border: 1px solid rgba(212,168,75,0.2);
+            border-radius: 50px;
+            color: var(--warm-white);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 400;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-tab::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .category-tab:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+            transform: translateY(-3px);
+        }
+
+        .category-tab.active {
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            border-color: var(--gold);
+            color: var(--deep-navy);
+            font-weight: 600;
+            box-shadow: 0 10px 35px rgba(212,168,75,0.35);
+        }
+
+        .tab-count {
+            display: inline-block;
+            margin-left: 8px;
+            font-size: 0.75rem;
+            opacity: 0.8;
+        }
+
+        /* ===== PRODUCTS GRID ===== */
+        .products-section {
+            padding: 40px 70px 100px;
+            position: relative;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+            gap: 40px;
+            max-width: 1500px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            position: relative;
+            background: linear-gradient(145deg, rgba(26,35,50,0.8), rgba(15,22,33,0.95));
+            border: 1px solid rgba(212,168,75,0.12);
+            border-radius: 24px;
+            padding: 35px 28px 30px;
+            text-align: center;
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            transform-style: preserve-3d;
+            perspective: 1200px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+                rgba(212,168,75,0.1) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            border-radius: 24px;
+        }
+
+        .product-card:hover::before { opacity: 1; }
+
+        .product-card:hover {
+            transform: translateY(-15px) rotateX(5deg);
+            border-color: rgba(212,168,75,0.4);
+            box-shadow: 0 35px 70px rgba(0,0,0,0.5), 0 0 50px rgba(212,168,75,0.12);
+        }
+
+        .product-card.hidden { display: none; }
+
+        .product-badge {
+            position: absolute;
+            top: 18px; right: 18px;
+            padding: 6px 14px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: var(--deep-navy);
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            border-radius: 20px;
+            z-index: 5;
+            box-shadow: 0 4px 15px rgba(212,168,75,0.4);
+        }
+
+        .product-badge.sale { background: linear-gradient(135deg, #e74c3c, #c0392b); }
+        .product-badge.new { background: linear-gradient(135deg, #27ae60, #1e8449); }
+
+        .product-image-wrapper {
+            position: relative;
+            height: 280px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            overflow: hidden;
+            border-radius: 14px;
+            background: rgba(15, 22, 33, 0.5);
+        }
+
+        .product-image-wrapper img {
+            width: 85%;
+            height: 85%;
+            object-fit: contain;
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            filter: drop-shadow(0 10px 25px rgba(0,0,0,0.3));
+            animation: imageFloat 5s ease-in-out infinite;
+        }
+
+        @keyframes imageFloat {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-12px) scale(1.02); }
+        }
+
+        .product-card:hover .product-image-wrapper img {
+            transform: scale(1.12) rotateY(6deg);
+            filter: drop-shadow(0 20px 40px rgba(212,168,75,0.25));
+        }
+
+        .product-image-wrapper::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(212,168,75,0.12) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+        }
+
+        .product-card:hover .product-image-wrapper::after { opacity: 1; }
+
+        .product-category-tag {
+            font-size: 0.68rem;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 10px;
+            font-weight: 500;
+            opacity: 0.85;
+        }
+
+        .product-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.65rem;
+            font-weight: 500;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+            transition: color 0.4s ease;
+            line-height: 1.2;
+        }
+
+        .product-card:hover .product-name { color: var(--gold); }
+
+        .product-brand {
+            font-size: 0.82rem;
+            color: var(--muted-text);
+            margin-bottom: 12px;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .product-notes {
+            font-size: 0.8rem;
+            color: var(--slate-gray);
+            letter-spacing: 1px;
+            font-weight: 300;
+            font-style: italic;
+            margin-bottom: 18px;
+            line-height: 1.5;
+        }
+
+        .product-price {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--gold);
+            margin-bottom: 18px;
+        }
+
+        .product-price .original-price {
+            font-size: 1rem;
+            color: var(--muted-text);
+            text-decoration: line-through;
+            margin-left: 10px;
+            font-weight: 400;
+            opacity: 0.7;
+        }
+
+        .btn-add-cart {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 14px 24px;
+            background: transparent;
+            border: 1.5px solid var(--gold);
+            border-radius: 50px;
+            color: var(--gold);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-add-cart::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            z-index: -1;
+        }
+
+        .btn-add-cart:hover {
+            color: var(--deep-navy);
+            border-color: var(--gold);
+        }
+        .btn-add-cart:hover::before { transform: scaleX(1); }
+        .btn-add-cart:active { transform: scale(0.97); }
+
+        .btn-add-cart.in-cart {
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: var(--deep-navy);
+            border-color: var(--gold);
+            font-weight: 600;
+        }
+
+        .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 80px 20px;
+            display: none;
+        }
+        .no-results.visible { display: block; }
+        .no-results-icon { font-size: 4rem; margin-bottom: 25px; opacity: 0.3; }
+        .no-results h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: 15px;
+        }
+        .no-results p { color: var(--muted-text); font-size: 1rem; }
+
+        /* ===== LIMITED EDITION SECTION ===== */
+        .consultation-section {
+            padding: 100px 70px;
+            position: relative;
+            background: linear-gradient(180deg, var(--deep-navy) 0%, var(--midnight-blue) 50%, var(--deep-navy) 100%);
+            overflow: hidden;
+        }
+
+        .consultation-container { max-width: 1400px; margin: 0 auto; }
+
+        .consultation-header {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .consultation-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 22px;
+            background: rgba(212,168,75,0.1);
+            border: 1px solid rgba(212,168,75,0.3);
+            border-radius: 50px;
+            font-size: 0.78rem;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 25px;
+            font-weight: 500;
+        }
+
+        .consultation-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            font-weight: 300;
+            line-height: 1.15;
+            margin-bottom: 20px;
+        }
+
+        .consultation-text {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: var(--muted-text);
+            margin-bottom: 35px;
+            font-weight: 300;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-consultation {
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+            padding: 20px 42px;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            color: var(--deep-navy);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            border: none;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            box-shadow: 0 15px 45px rgba(212,168,75,0.3);
+        }
+
+        .btn-consultation:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 25px 60px rgba(212,168,75,0.45);
+        }
+
+        .limited-showcase {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 35px;
+            margin-top: 50px;
+        }
+
+        .limited-product-card {
+            position: relative;
+            background: linear-gradient(145deg, rgba(26,35,50,0.9), rgba(15,22,33,0.95));
+            border: 1.5px solid rgba(212,168,75,0.3);
+            border-radius: 24px;
+            padding: 30px 25px;
+            text-align: center;
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            overflow: hidden;
+        }
+
+        .limited-product-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+        }
+
+        .limited-product-card:hover {
+            transform: translateY(-12px) scale(1.03);
+            border-color: var(--gold);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5), 0 0 40px rgba(212,168,75,0.2);
+        }
+
+        .limited-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: var(--deep-navy);
+            font-size: 0.62rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-radius: 20px;
+            margin-bottom: 18px;
+            box-shadow: 0 4px 15px rgba(212,168,75,0.4);
+        }
+
+        .limited-image-wrapper {
+            position: relative;
+            height: 240px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            border-radius: 14px;
+            background: rgba(15, 22, 33, 0.6);
+            overflow: hidden;
+        }
+
+        .limited-image-wrapper img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+            transition: all 0.5s ease;
+            filter: drop-shadow(0 8px 20px rgba(0,0,0,0.4));
+            animation: limitedImageFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes limitedImageFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(2deg); }
+        }
+
+        .limited-product-card:hover .limited-image-wrapper img {
+            transform: scale(1.15) rotateY(8deg);
+            filter: drop-shadow(0 15px 35px rgba(212,168,75,0.3));
+        }
+
+        .limited-product-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.45rem;
+            font-weight: 500;
+            color: var(--warm-white);
+            margin-bottom: 8px;
+            transition: color 0.3s ease;
+        }
+
+        .limited-product-card:hover .limited-product-name { color: var(--gold); }
+
+        .limited-product-brand {
+            font-size: 0.78rem;
+            color: var(--muted-text);
+            margin-bottom: 12px;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .limited-product-price {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.35rem;
+            font-weight: 600;
+            color: var(--gold);
+            margin-bottom: 18px;
+        }
+
+        .btn-limited-cart {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 14px 24px;
+            background: transparent;
+            border: 1.5px solid var(--gold);
+            border-radius: 50px;
+            color: var(--gold);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-limited-cart::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            z-index: -1;
+        }
+
+        .btn-limited-cart:hover {
+            color: var(--deep-navy);
+            border-color: var(--gold);
+        }
+        .btn-limited-cart:hover::before { transform: scaleX(1); }
+        .btn-limited-cart:active { transform: scale(0.97); }
+
+        .btn-limited-cart.in-cart {
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: var(--deep-navy);
+            border-color: var(--gold);
+            font-weight: 600;
+        }
+
+        .sparkle-float {
+            position: absolute;
+            font-size: 1.5rem;
+            animation: sparkleAnim 3s ease-in-out infinite;
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        @keyframes sparkleAnim {
+            0%, 100% { transform: translateY(0) scale(1); opacity: 0.6; }
+            50% { transform: translateY(-15px) scale(1.3); opacity: 1; }
+        }
+
+        .sparkle-1 { top: 15%; left: 8%; animation-delay: 0s; }
+        .sparkle-2 { top: 25%; right: 10%; animation-delay: -1s; }
+        .sparkle-3 { bottom: 20%; left: 12%; animation-delay: -2s; }
+        .sparkle-4 { bottom: 15%; right: 8%; animation-delay: -0.5s; }
+        .sparkle-5 { top: 50%; left: 5%; animation-delay: -1.5s; }
+        .sparkle-6 { top: 45%; right: 5%; animation-delay: -2.5s; }
+
+        /* Footer */
+        .minimal-footer {
+            padding: 35px 70px;
+            background: var(--deep-navy);
+            border-top: 1px solid rgba(212,168,75,0.08);
+            text-align: center;
+        }
+
+        .copyright {
+            color: var(--muted-text);
+            font-size: 0.85rem;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        /* ============================================
+           FLOATING CART BUTTON
+           ============================================ */
+        .cart-fab {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            border: none;
+            cursor: pointer;
+            z-index: 9998;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 30px rgba(212,168,75,0.4), 0 0 0 0 rgba(212,168,75,0.3);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            transform: scale(0);
+            opacity: 0;
+        }
+
+        .cart-fab.visible {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .cart-fab:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 40px rgba(212,168,75,0.5), 0 0 0 6px rgba(212,168,75,0.1);
+        }
+
+        .cart-fab:active { transform: scale(0.95); }
+
+        .cart-fab svg {
+            width: 28px;
+            height: 28px;
+            fill: var(--deep-navy);
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            min-width: 22px;
+            height: 22px;
+            border-radius: 11px;
+            background: #e74c3c;
+            color: #fff;
+            font-size: 0.7rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 5px;
+            border: 2px solid var(--deep-navy);
+            transition: transform 0.3s ease;
+        }
+
+        .cart-badge.pop {
+            animation: badgePop 0.4s ease;
+        }
+
+        @keyframes badgePop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.4); }
+            100% { transform: scale(1); }
+        }
+
+        /* ============================================
+           CART PANEL (slide from right)
+           ============================================ */
+        .cart-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(4px);
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .cart-overlay.open { opacity: 1; visibility: visible; }
+
+        .cart-panel {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 420px;
+            max-width: 90vw;
+            height: 100vh;
+            height: 100dvh;
+            background: var(--deep-navy);
+            border-left: 1px solid rgba(212,168,75,0.15);
+            z-index: 10000;
+            transform: translateX(100%);
+            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .cart-panel.open { transform: translateX(0); }
+
+        .cart-panel-header {
+            padding: 28px 25px 20px;
+            border-bottom: 1px solid rgba(212,168,75,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-shrink: 0;
+        }
+
+        .cart-panel-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: var(--gold);
+            letter-spacing: 1px;
+        }
+
+        .cart-panel-title span {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            color: var(--muted-text);
+            font-weight: 400;
+            margin-left: 8px;
+        }
+
+        .cart-close {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: 1px solid rgba(212,168,75,0.2);
+            background: none;
+            color: var(--muted-text);
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .cart-close:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+            background: rgba(212,168,75,0.1);
+        }
+
+        .cart-items-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 15px 25px;
+        }
+
+        .cart-items-list::-webkit-scrollbar { width: 4px; }
+        .cart-items-list::-webkit-scrollbar-thumb { background: rgba(212,168,75,0.3); border-radius: 4px; }
+
+        .cart-empty {
+            text-align: center;
+            padding: 50px 10px;
+        }
+
+        .cart-empty-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            opacity: 0.3;
+        }
+
+        .cart-empty p {
+            color: var(--muted-text);
+            font-size: 0.9rem;
+            font-weight: 300;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(212,168,75,0.06);
+            animation: cartItemIn 0.3s ease;
+        }
+
+        @keyframes cartItemIn {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .cart-item-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            object-fit: cover;
+            flex-shrink: 0;
+            background: rgba(26,35,50,0.6);
+        }
+
+        .cart-item-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .cart-item-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: var(--warm-white);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .cart-item-brand {
+            font-size: 0.7rem;
+            color: var(--muted-text);
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        .cart-item-price {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--gold);
+            margin-top: 2px;
+        }
+
+        .cart-item-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        .qty-btn {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 1px solid rgba(212,168,75,0.25);
+            background: none;
+            color: var(--gold);
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            line-height: 1;
+        }
+
+        .qty-btn:hover {
+            background: rgba(212,168,75,0.15);
+            border-color: var(--gold);
+        }
+
+        .qty-num {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--warm-white);
+            min-width: 20px;
+            text-align: center;
+        }
+
+        .cart-item-remove {
+            background: none;
+            border: none;
+            color: var(--muted-text);
+            cursor: pointer;
+            font-size: 0.85rem;
+            padding: 4px;
+            transition: color 0.2s ease;
+            margin-left: 4px;
+        }
+
+        .cart-item-remove:hover { color: #e74c3c; }
+
+        /* Cart Footer — form + checkout */
+        .cart-panel-footer {
+            padding: 20px 25px 25px;
+            border-top: 1px solid rgba(212,168,75,0.1);
+            flex-shrink: 0;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 18px;
+        }
+
+        .cart-total-label {
+            font-size: 0.85rem;
+            color: var(--muted-text);
+            font-weight: 400;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .cart-total-value {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--gold);
+        }
+
+        .cart-form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .cart-form input {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(26,35,50,0.7);
+            border: 1px solid rgba(212,168,75,0.15);
+            border-radius: 12px;
+            color: var(--warm-white);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 300;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .cart-form input::placeholder { color: var(--muted-text); font-style: italic; }
+        .cart-form input:focus { border-color: var(--gold); }
+
+        .cart-form textarea {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(26,35,50,0.7);
+            border: 1px solid rgba(212,168,75,0.15);
+            border-radius: 12px;
+            color: var(--warm-white);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 300;
+            outline: none;
+            resize: none;
+            height: 60px;
+            transition: border-color 0.3s ease;
+        }
+
+        .cart-form textarea::placeholder { color: var(--muted-text); font-style: italic; }
+        .cart-form textarea:focus { border-color: var(--gold); }
+
+        .btn-checkout {
+            width: 100%;
+            padding: 16px 24px;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            border: none;
+            border-radius: 50px;
+            color: #fff;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-checkout:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(37,211,102,0.35);
+        }
+
+        .btn-checkout:active { transform: scale(0.98); }
+
+        .btn-checkout:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .btn-checkout svg {
+            width: 20px;
+            height: 20px;
+            fill: #fff;
+        }
+
+        .cart-pay-note {
+            text-align: center;
+            font-size: 0.7rem;
+            color: var(--muted-text);
+            margin-top: 10px;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        .cart-pay-note span { color: var(--gold); font-weight: 500; }
+
+        /* Form error */
+        .cart-form input.error,
+        .cart-form textarea.error {
+            border-color: #e74c3c;
+        }
+
+        .form-error-msg {
+            font-size: 0.7rem;
+            color: #e74c3c;
+            margin-top: -5px;
+            display: none;
+        }
+
+        .form-error-msg.show { display: block; }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .limited-showcase { grid-template-columns: repeat(2, 1fr); gap: 28px; }
+            .products-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+        }
+
+        @media (max-width: 768px) {
+            nav { padding: 20px 30px; }
+            nav.scrolled { padding: 15px 30px; }
+            .nav-links { display: none; }
+            .menu-toggle { display: flex; }
+            .collections-hero { padding: 130px 30px 70px; }
+            .collections-title { font-size: 3rem; }
+            .category-section { padding: 40px 30px 30px; }
+            .category-tabs { gap: 12px; }
+            .category-tab { padding: 12px 24px; font-size: 0.72rem; }
+            .products-section { padding: 30px 30px 80px; }
+            .products-grid { grid-template-columns: 1fr; gap: 30px; }
+            .consultation-section { padding: 70px 30px; }
+            .consultation-title { font-size: 2.5rem; }
+            .limited-showcase { grid-template-columns: 1fr; gap: 25px; }
+            .minimal-footer { padding: 25px 30px; }
+            .cart-fab { bottom: 20px; right: 20px; width: 56px; height: 56px; }
+            .cart-panel { width: 100vw; max-width: 100vw; }
         }
     </style>
 </head>
 <body>
 
+    <!-- Preloader -->
     <div class="preloader" id="preloader">
         <div class="preloader-logo">TLor</div>
-        <div class="preloader-bar"><div class="preloader-fill"></div></div>
-        <p class="preloader-sub">Loading Collections</p>
-        <p class="preloader-sub" style="margin-top:8px;color:var(--gold);opacity:.6;font-size:.62rem;letter-spacing:4px">Premium Fragrances Await</p>
+        <div class="preloader-line"><div class="preloader-progress"></div></div>
+        <p class="preloader-text">Loading Collections</p>
+        <p class="preloader-subtext">Premium Fragrances Await</p>
     </div>
 
+    <!-- Navigation -->
     <nav id="navbar">
         <a href="index.html" class="nav-logo">TLor</a>
         <ul class="nav-links">
@@ -324,52 +1456,55 @@
             <li><a href="collections.html" class="active">Collections</a></li>
             <li><a href="contact.html">Contact</a></li>
         </ul>
-        <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle mobile menu">
             <span></span><span></span><span></span>
         </button>
     </nav>
 
-    <div class="mobile-menu" id="mobileMenu">
-        <a href="index.html">Home</a>
-        <a href="collections.html" class="active">Collections</a>
-        <a href="contact.html">Contact</a>
-    </div>
-
+    <!-- Hero Section -->
     <section class="collections-hero">
-        <div class="hero-orb hero-orb-1"></div>
-        <div class="hero-orb hero-orb-2"></div>
-        <div class="grid-overlay"></div>
+        <div class="collections-hero-bg">
+            <div class="hero-orb hero-orb-1"></div>
+            <div class="hero-orb hero-orb-2"></div>
+            <div class="grid-overlay"></div>
+        </div>
         <div class="collections-hero-content">
             <span class="collections-tag">Shop Our Collections</span>
             <h1 class="collections-title">Premium Fragrances</h1>
             <p class="collections-subtitle">Premium fragrances sourced from top brands worldwide. Quality scents at prices that make sense.</p>
+            
             <div class="search-container">
                 <div class="search-wrapper">
                     <span class="search-icon">🔍</span>
                     <input type="text" class="search-input" id="searchInput" placeholder="Search fragrances by name, brand, or notes...">
-                    <button class="search-clear" id="searchClear" aria-label="Clear">✕</button>
+                    <button class="search-clear" id="searchClear" aria-label="Clear search">✕</button>
                 </div>
-                <p class="results-count" id="resultsCount"></p>
+                <p class="results-count" id="resultsCount"><span>25</span> Products Available</p>
             </div>
         </div>
     </section>
 
-    <section class="category-section">
-        <div class="category-tabs" id="categoryTabs">
-            <button class="category-tab active" data-category="all">All Fragrances <span class="tab-count">(0)</span></button>
-            <button class="category-tab" data-category="women">Women's <span class="tab-count">(0)</span></button>
-            <button class="category-tab" data-category="men">Men's <span class="tab-count">(0)</span></button>
-            <button class="category-tab" data-category="unisex">Unisex <span class="tab-count">(0)</span></button>
-            <button class="category-tab" data-category="gifts">Gift Sets <span class="tab-count">(0)</span></button>
+    <!-- Category Tabs -->
+    <section class="category-section" id="categorySection">
+        <div class="category-tabs">
+            <button class="category-tab active" data-category="all">All Fragrances <span class="tab-count">(25)</span></button>
+            <button class="category-tab" data-category="women">Women's <span class="tab-count">(7)</span></button>
+            <button class="category-tab" data-category="men">Men's <span class="tab-count">(7)</span></button>
+            <button class="category-tab" data-category="unisex">Unisex <span class="tab-count">(6)</span></button>
+            <button class="category-tab" data-category="gifts">Gift Sets <span class="tab-count">(5)</span></button>
         </div>
     </section>
 
+    <!-- Products Grid -->
     <section class="products-section">
         <div class="products-grid" id="productsGrid">
 
+            <!-- WOMEN'S -->
             <div class="product-card" data-category="women" data-name="Chanel Coco Mademoiselle" data-brand="Chanel" data-notes="orange bergamot rose jasmine patchouli vetiver" data-price="NLe 850">
                 <div class="product-badge new">New</div>
-                <div class="product-image-wrapper"><img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=300&h=350&fit=crop&q=75" alt="Chanel Coco Mademoiselle" loading="lazy" decoding="async"></div>
+                <div class="product-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=400&h=450&fit=crop&q=80" alt="Chanel Coco Mademoiselle" loading="lazy">
+                </div>
                 <span class="product-category-tag">Women's Fragrance</span>
                 <h3 class="product-name">Coco Mademoiselle</h3>
                 <p class="product-brand">Chanel</p>
@@ -379,7 +1514,9 @@
             </div>
 
             <div class="product-card" data-category="women" data-name="Dior J'adore EDP" data-brand="Dior" data-notes="ylang-ylang damascus rose jasmine sambac" data-price="NLe 920">
-                <div class="product-image-wrapper"><img src="https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=300&h=350&fit=crop&q=75" alt="Dior J'adore" loading="lazy" decoding="async"></div>
+                <div class="product-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=400&h=450&fit=crop&q=80" alt="Dior J'adore" loading="lazy" style="animation-delay: -0.5s;">
+                </div>
                 <span class="product-category-tag">Women's Fragrance</span>
                 <h3 class="product-name">J'adore EDP</h3>
                 <p class="product-brand">Dior</p>
@@ -390,7 +1527,9 @@
 
             <div class="product-card" data-category="women" data-name="YSL Libre EDP" data-brand="Yves Saint Laurent" data-notes="orange blossom lavender musk cedar vanilla" data-price="NLe 780">
                 <div class="product-badge">Bestseller</div>
-                <div class="product-image-wrapper"><img src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=300&h=350&fit=crop&q=75" alt="YSL Libre" loading="lazy" decoding="async"></div>
+                <div class="product-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=400&h=450&fit=crop&q=80" alt="YSL Libre" loading="lazy" style="animation-delay: -1s;">
+                </div>
                 <span class="product-category-tag">Women's Fragrance</span>
                 <h3 class="product-name">Libre EDP</h3>
                 <p class="product-brand">Yves Saint Laurent</p>
@@ -400,7 +1539,9 @@
             </div>
 
             <div class="product-card" data-category="women" data-name="Gucci Bloom EDP" data-brand="Gucci" data-notes="jasmine tuberose rangoon creeper" data-price="NLe 695">
-                <div class="product-image-wrapper"><img src="https://images.unsplash.com/photo-1590736969955-71cc94901144?w=300&h=350&fit=crop&q=75" alt="Gucci Bloom" loading="lazy" decoding="async"></div>
+                <div class="product-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1590736969955-71cc94901144?w=400&h=450&fit=crop&q=80" alt="Gucci Bloom" loading="lazy" style="animation-delay: -1.5s;">
+                </div>
                 <span class="product-category-tag">Women's Fragrance</span>
                 <h3 class="product-name">Bloom EDP</h3>
                 <p class="product-brand">Gucci</p>
@@ -410,7 +1551,9 @@
             </div>
 
             <div class="product-card" data-category="women" data-name="Armani Si Passione EDP" data-brand="Giorgio Armani" data-notes="black currant mandarin rose patchouli vanilla" data-price="NLe 750">
-                <div class="product-image-wrapper"><img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?w=300&h=350&fit=crop&q=75" alt="Armani Si Passione" loading="lazy" decoding="async"></div>
+                <div class="product-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?w=400&h=450&fit=crop&q=80" alt="Armani Si Passione" loading="lazy" style="animation-delay: -2s;">
+                </div>
                 <span class="product-category-tag">Women's Fragrance</span>
                 <h3 class="product-name">Si Passione EDP</h3>
                 <p class="product-brand">Giorgio Armani</p>
@@ -421,7 +1564,9 @@
 
             <div class="product-card" data-category="women" data-name="Versace Bright Crystal EDT" data-brand="Versace" data-notes="yuzu pomegranate magnolia peony lotus amber musk" data-price="NLe 520">
                 <div class="product-badge sale">Sale</div>
-                <div class="product-image-wrapper"><img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=300&h=350&fit=crop&q=75" alt="Versace Bright Crystal" loading="lazy" decoding="async"></div>
+                <div class="product-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=400&h=450&fit=crop&q=80" alt="Versace Bright Crystal" loading="lazy" style="animation-delay: -2.5s;">
+                </div>
                 <span class="product-category-tag">Women's Fragrance</span>
                 <h3 class="product-name">Bright Crystal EDT</h3>
                 <p class="product-brand">Versace</p>
@@ -431,7 +1576,9 @@
             </div>
 
             <div class="product-card" data-category="women" data-name="Lancome La Vie Est Belle EDP" data-brand="Lancôme" data-notes="blackberry pear iris praline vanilla patchouli" data-price="NLe 720">
-                <div class="product-image-wrapper"><img src="https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=300&h=350&fit=crop&q=75" alt="Lancome La Vie Est Belle" loading="lazy" decoding="async"></div>
+                <div class="product-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=400&h=450&fit=crop&q=80" alt="Lancome La Vie Est Belle" loading="lazy" style="animation-delay: -3s;">
+                </div>
                 <span class="product-category-tag">Women's Fragrance</span>
                 <h3 class="product-name">La Vie Est Belle EDP</h3>
                 <p class="product-brand">Lancôme</p>
@@ -440,9 +1587,12 @@
                 <button class="btn-add-cart">Add to Cart →</button>
             </div>
 
+            <!-- MEN'S -->
             <div class="product-card" data-category="men" data-name="Dior Sauvage EDT" data-brand="Dior" data-notes="bergamot pepper sichuan lavender ambroxan cedar" data-price="NLe 880">
                 <div class="product-badge">Bestseller</div>
-                <div class="product-image-wrapper"><img src="https://images.unsplash.com/photo-1523293182086-7651a899d371?w=300&h=350&fit=crop&q=75" alt="Dior Sauvage" loading="lazy" decoding="async"></div>
+                <div class="product-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1523293182086-7651a899d371?w=400&h=450&fit=crop&q=80" alt="Dior Sauvage" loading="lazy">
+                </div>
                 <span class="product-category-tag">Men's Fragrance</span>
                 <h3 class="product-name">Sauvage EDT</h3>
                 <p class="product-brand">Dior</p>
@@ -452,7 +1602,9 @@
             </div>
 
             <div class="product-card" data-category="men" data-name="Bleu de Chanel EDT" data-brand="Chanel" data-notes="grapefruit lemon mint ginger nutmeg incense cedar" data-price="NLe 950">
-                <div class="product-image-wrapper"><img src="https://images.unsplash.com/photo-1595425959632-ybda1c26f204?w=300&h=350&fit=crop&q=75" alt="Bleu de Chanel" loading="lazy" decoding="async"></div>
+                <div class="product-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1595425959632-ybda1c26f204?w=400&h=450&fit=crop&q=80" alt="Bleu de Chanel" loading="lazy" style="animation-delay: -0.5s;">
+                </div>
                 <span class="product-category-tag">Men's Fragrance</span>
                 <h3 class="product-name">Bleu de Chanel EDT</h3>
                 <p class="product-brand">Chanel</p>
@@ -462,7 +1614,9 @@
             </div>
 
             <div class="product-card" data-category="men" data-name="Versace Eros EDT" data-brand="Versace" data-notes="mint green apple tonka bean ambroxan vanilla" data-price="NLe 650">
-                <div class="product-image-wrapper"><img src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=300&h=350&fit=crop&q=75" alt="Versace Eros" loading="lazy" decoding="async"></div>
+                <div class="product-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=400&h=450&fit=crop&q=80" alt="Versace Eros" loading="lazy" style="animation-delay: -1s;">
+                </div>
                 <span class="product-category-tag">Men's Fragrance</span>
                 <h3 class="product-name">Eros EDT</h3>
                 <p class="product-brand">Versace</p>
@@ -472,7 +1626,9 @@
             </div>
 
             <div class="product-card" data-category="men" data-name="Acqua di Giò Profondo" data-brand="Giorgio Armani" data-notes="sea notes bergamot neroli persian lime rosemary" data-price="NLe 820">
-                <div class="product-image-wrapper"><img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?w=300&h=350&fit=crop&q=75" alt="Acqua di Gio" loading="lazy" decoding="async"></div>
+                <div class="product-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?w=400&h=450&fit=crop&q=80" alt="Acqua di Gio Profondo" loading="lazy" style="animation-delay: -1.5s;">
+                </div>
                 <span class="product-category-tag">Men's Fragrance</span>
                 <h3 class="product-name">Acqua di Giò Profondo</h3>
                 <p class="product-brand">Giorgio Armani</p>
@@ -482,8 +1638,10 @@
             </div>
 
             <div class="product-card" data-category="men" data-name="Tom Ford Oud Wood EDP" data-brand="Tom Ford" data-notes="oud wood cardamom sandalwood vetiver tonka amber" data-price="NLe 1,450">
-                <div class="product-badge">✨ Limited</div>
-                <div class="product-image-wrapper"><img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=300&h=350&fit=crop&q=75" alt="Tom Ford Oud Wood" loading="lazy" decoding="async"></div>
+                <div class="product-badge">✨ Limited Edition</div>
+                <div class="product-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=400&h=450&fit=crop&q=80" alt="Tom Ford Oud Wood" loading="lazy" style="animation-delay: -2s;">
+                </div>
                 <span class="product-category-tag">Men's Fragrance</span>
                 <h3 class="product-name">Oud Wood EDP</h3>
                 <p class="product-brand">Tom Ford</p>
@@ -493,7 +1651,9 @@
             </div>
 
             <div class="product-card" data-category="men" data-name="Paco Rabanne Invictus EDT" data-brand="Paco Rabanne" data-notes="grapefruit bay leaf guaiac wood ambergris oak moss" data-price="NLe 580">
-                <div class="product-image-wrapper"><img src="https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=300&h=350&fit=crop&q=75" alt="Paco Rabanne Invictus" loading="lazy" decoding="async"></div>
+                <div class="product-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=400&h=450&fit=crop&q=80" alt="Paco Rabanne Invictus" loading="lazy" style="animation-delay: -2.5s;">
+                </div>
                 <span class="product-category-tag">Men's Fragrance</span>
                 <h3 class="product-name">Invictus EDT</h3>
                 <p class="product-brand">Paco Rabanne</p>
@@ -503,7 +1663,9 @@
             </div>
 
             <div class="product-card" data-category="men" data-name="Jean Paul Gaultier Le Male EDT" data-brand="Jean Paul Gaultier" data-notes="mint lavender vanilla tonka bean cedar" data-price="NLe 620">
-                <div class="product-image-wrapper"><img src="https://images.unsplash.com/photo-1590736969955-71cc94901144?w=300&h=350&fit=crop&q=75" alt="JPG Le Male" loading="lazy" decoding="async"></div>
+                <div class="product-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1590736969955-71cc94901144?w=400&h=450&fit=crop&q=80" alt="Jean Paul Gaultier Le Male" loading="lazy" style="animation-delay: -3s;">
+                </div>
                 <span class="product-category-tag">Men's Fragrance</span>
                 <h3 class="product-name">Le Male EDT</h3>
                 <p class="product-brand">Jean Paul Gaultier</p>
@@ -512,9 +1674,12 @@
                 <button class="btn-add-cart">Add to Cart →</button>
             </div>
 
+            <!-- UNISEX -->
             <div class="product-card" data-category="unisex" data-name="Maison Margiela Lazy Sunday Morning" data-brand="Maison Margiela" data-notes="jasmine musk white musk cedar vanilla tonka" data-price="NLe 680">
                 <div class="product-badge new">New</div>
-                <div class="product-image-wrapper"><img src="https://images.unsplash.com/photo-1595425959632-ybda1c26f204?w=300&h=350&fit=crop&q=75" alt="Margiela" loading="lazy" decoding="async"></div>
+                <div class="product-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1595425959632-ybda1c26f204?w=400&h=450&fit=crop&q=80" alt="Maison Margiela Replica" loading="lazy">
+                </div>
                 <span class="product-category-tag">Unisex Scent</span>
                 <h3 class="product-name">Lazy Sunday Morning</h3>
                 <p class="product-brand">Maison Margiela</p>
@@ -524,7 +1689,9 @@
             </div>
 
             <div class="product-card" data-category="unisex" data-name="Byredo Gypsy Water EDP" data-brand="Byredo" data-notes="bergamot lemon pine needles incense amber sandalwood" data-price="NLe 920">
-                <div class="product-image-wrapper"><img src="https://images.unsplash.com/photo-1523293182086-7651a899d371?w=300&h=350&fit=crop&q=75" alt="Byredo" loading="lazy" decoding="async"></div>
+                <div class="product-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1523293182086-7651a899d371?w=400&h=450&fit=crop&q=80" alt="Byredo Gypsy Water" loading="lazy" style="animation-delay: -0.5s;">
+                </div>
                 <span class="product-category-tag">Unisex Scent</span>
                 <h3 class="product-name">Gypsy Water EDP</h3>
                 <p class="product-brand">Byredo</p>
@@ -534,7 +1701,9 @@
             </div>
 
             <div class="product-card" data-category="unisex" data-name="Jo Malone Wood Sage & Sea Salt" data-brand="Jo Malone London" data-notes="sea salt sage grapefruit ambrette seed musk" data-price="NLe 750">
-                <div class="product-image-wrapper"><img src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=300&h=350&fit=crop&q=75" alt="Jo Malone" loading="lazy" decoding="async"></div>
+                <div class="product-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=400&h=450&fit=crop&q=80" alt="Jo Malone Wood Sage" loading="lazy" style="animation-delay: -1s;">
+                </div>
                 <span class="product-category-tag">Unisex Scent</span>
                 <h3 class="product-name">Wood Sage & Sea Salt</h3>
                 <p class="product-brand">Jo Malone London</p>
@@ -545,7 +1714,9 @@
 
             <div class="product-card" data-category="unisex" data-name="Le Labo Santal 33 EDP" data-brand="Le Labo" data-notes="sandalwood cedar iris violet cardamom leather musk" data-price="NLe 1,180">
                 <div class="product-badge">Bestseller</div>
-                <div class="product-image-wrapper"><img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?w=300&h=350&fit=crop&q=75" alt="Le Labo" loading="lazy" decoding="async"></div>
+                <div class="product-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?w=400&h=450&fit=crop&q=80" alt="Le Labo Santal 33" loading="lazy" style="animation-delay: -1.5s;">
+                </div>
                 <span class="product-category-tag">Unisex Scent</span>
                 <h3 class="product-name">Santal 33 EDP</h3>
                 <p class="product-brand">Le Labo</p>
@@ -555,7 +1726,9 @@
             </div>
 
             <div class="product-card" data-category="unisex" data-name="Diptyque Philosykos EDT" data-brand="Diptyque" data-notes="fig leaf fig tree coconut cedar woody notes" data-price="NLe 850">
-                <div class="product-image-wrapper"><img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=300&h=350&fit=crop&q=75" alt="Diptyque" loading="lazy" decoding="async"></div>
+                <div class="product-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=400&h=450&fit=crop&q=80" alt="Diptyque Philosykos" loading="lazy" style="animation-delay: -2s;">
+                </div>
                 <span class="product-category-tag">Unisex Scent</span>
                 <h3 class="product-name">Philosykos EDT</h3>
                 <p class="product-brand">Diptyque</p>
@@ -565,7 +1738,9 @@
             </div>
 
             <div class="product-card" data-category="unisex" data-name="Aesop Hwyl EDP" data-brand="Aesop" data-notes="cypress frankincense vetiver tobacco resinous wood" data-price="NLe 980">
-                <div class="product-image-wrapper"><img src="https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=300&h=350&fit=crop&q=75" alt="Aesop" loading="lazy" decoding="async"></div>
+                <div class="product-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=400&h=450&fit=crop&q=80" alt="Aesop Hwyl" loading="lazy" style="animation-delay: -2.5s;">
+                </div>
                 <span class="product-category-tag">Unisex Scent</span>
                 <h3 class="product-name">Hwyl EDP</h3>
                 <p class="product-brand">Aesop</p>
@@ -574,9 +1749,12 @@
                 <button class="btn-add-cart">Add to Cart →</button>
             </div>
 
+            <!-- GIFT SETS -->
             <div class="product-card" data-category="gifts" data-name="Luxury Discovery Set" data-brand="TLor Collection" data-notes="assorted miniatures travel size variety" data-price="NLe 480">
-                <div class="product-badge">✨ Limited</div>
-                <div class="product-image-wrapper"><img src="https://images.unsplash.com/photo-1590736969955-71cc94901144?w=300&h=350&fit=crop&q=75" alt="Discovery Set" loading="lazy" decoding="async"></div>
+                <div class="product-badge">✨ Limited Edition</div>
+                <div class="product-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1590736969955-71cc94901144?w=400&h=450&fit=crop&q=80" alt="Luxury Discovery Set" loading="lazy">
+                </div>
                 <span class="product-category-tag">Gift Set</span>
                 <h3 class="product-name">Luxury Discovery Set</h3>
                 <p class="product-brand">TLor Collection</p>
@@ -586,7 +1764,9 @@
             </div>
 
             <div class="product-card" data-category="gifts" data-name="Romantic Duo Gift Box" data-brand="TLor Collection" data-notes="his hers couple set romantic occasion" data-price="NLe 1,250">
-                <div class="product-image-wrapper"><img src="https://images.unsplash.com/photo-1595425959632-ybda1c26f204?w=300&h=350&fit=crop&q=75" alt="Romantic Duo" loading="lazy" decoding="async"></div>
+                <div class="product-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1595425959632-ybda1c26f204?w=400&h=450&fit=crop&q=80" alt="Romantic Duo Gift Box" loading="lazy" style="animation-delay: -0.5s;">
+                </div>
                 <span class="product-category-tag">Gift Set</span>
                 <h3 class="product-name">Romantic Duo Gift Box</h3>
                 <p class="product-brand">TLor Collection</p>
@@ -597,7 +1777,9 @@
 
             <div class="product-card" data-category="gifts" data-name="Oud Lovers Collection" data-brand="TLor Collection" data-notes="oud rose amber sandalwood musk oriental" data-price="NLe 1,680">
                 <div class="product-badge sale">Sale</div>
-                <div class="product-image-wrapper"><img src="https://images.unsplash.com/photo-1523293182086-7651a899d371?w=300&h=350&fit=crop&q=75" alt="Oud Lovers" loading="lazy" decoding="async"></div>
+                <div class="product-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1523293182086-7651a899d371?w=400&h=450&fit=crop&q=80" alt="Oud Lovers Collection" loading="lazy" style="animation-delay: -1s;">
+                </div>
                 <span class="product-category-tag">Gift Set</span>
                 <h3 class="product-name">Oud Lovers Collection</h3>
                 <p class="product-brand">TLor Collection</p>
@@ -607,7 +1789,9 @@
             </div>
 
             <div class="product-card" data-category="gifts" data-name="Fresh Essentials Kit" data-brand="TLor Collection" data-notes="citrus aquatic floral fresh daily wear" data-price="NLe 720">
-                <div class="product-image-wrapper"><img src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=300&h=350&fit=crop&q=75" alt="Fresh Essentials" loading="lazy" decoding="async"></div>
+                <div class="product-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=400&h=450&fit=crop&q=80" alt="Fresh Essentials Kit" loading="lazy" style="animation-delay: -1.5s;">
+                </div>
                 <span class="product-category-tag">Gift Set</span>
                 <h3 class="product-name">Fresh Essentials Kit</h3>
                 <p class="product-brand">TLor Collection</p>
@@ -617,8 +1801,10 @@
             </div>
 
             <div class="product-card" data-category="gifts" data-name="Ultimate Luxury Hamper" data-brand="TLor Collection" data-notes="premium selection full size exclusive limited edition" data-price="NLe 2,850">
-                <div class="product-badge">✨ Limited</div>
-                <div class="product-image-wrapper"><img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?w=300&h=350&fit=crop&q=75" alt="Ultimate Hamper" loading="lazy" decoding="async"></div>
+                <div class="product-badge">✨ Limited Edition</div>
+                <div class="product-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?w=400&h=450&fit=crop&q=80" alt="Ultimate Luxury Hamper" loading="lazy" style="animation-delay: -2s;">
+                </div>
                 <span class="product-category-tag">Gift Set</span>
                 <h3 class="product-name">Ultimate Luxury Hamper</h3>
                 <p class="product-brand">TLor Collection</p>
@@ -632,65 +1818,76 @@
                 <h3>No fragrances found</h3>
                 <p>Try adjusting your search or browse our categories above.</p>
             </div>
+
         </div>
     </section>
 
+    <!-- LIMITED EDITION SECTION -->
     <section class="consultation-section">
+        <span class="sparkle-float sparkle-1">✨</span>
+        <span class="sparkle-float sparkle-2">⭐</span>
+        <span class="sparkle-float sparkle-3">💫</span>
+        <span class="sparkle-float sparkle-4">🌟</span>
+        <span class="sparkle-float sparkle-5">✦</span>
+        <span class="sparkle-float sparkle-6">💎</span>
+
         <div class="consultation-container">
-            <div class="consultation-header">
-                <p class="consultation-text">Can't decide? Let our experts curate a personalized fragrance wardrobe tailored just for you. The ultimate luxury experience awaits.</p>
-                <a href="#" class="btn-consultation" id="btnConsultation">
-                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                    Book Consultation →
-                </a>
-            </div>
-            <div style="height:80px"></div>
             <div class="consultation-header">
                 <span class="consultation-badge">✨ Limited Edition</span>
                 <h2 class="consultation-title">The Signature Experience</h2>
+                <p class="consultation-text">
+                    Can't decide? Let our experts curate a personalized fragrance wardrobe tailored just for you. The ultimate luxury experience awaits.
+                </p>
+                <a href="contact.html" class="btn-consultation">Book Consultation <span>→</span></a>
             </div>
+
             <div class="limited-showcase">
                 <div class="limited-product-card">
                     <span class="limited-badge">✨ Limited Edition</span>
-                    <div class="limited-image-wrapper"><img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=280&h=320&fit=crop&q=75" alt="Tom Ford" loading="lazy" decoding="async"></div>
+                    <div class="limited-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=350&h=380&fit=crop&q=80" alt="Tom Ford Oud Wood Limited" loading="lazy">
+                    </div>
                     <h3 class="limited-product-name">Oud Wood EDP</h3>
                     <p class="limited-product-brand">Tom Ford</p>
                     <p class="limited-product-price">NLe 1,450</p>
-                    <button class="btn-limited-cart" data-name="Tom Ford Oud Wood EDP" data-brand="Tom Ford" data-price="NLe 1,450" data-img="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=300&h=350&fit=crop&q=75">Add to Cart →</button>
+                    <button class="btn-limited-cart" data-name="Tom Ford Oud Wood EDP" data-brand="Tom Ford" data-price="NLe 1,450">Add to Cart →</button>
                 </div>
+
                 <div class="limited-product-card">
                     <span class="limited-badge">✨ Limited Edition</span>
-                    <div class="limited-image-wrapper"><img src="https://images.unsplash.com/photo-1590736969955-71cc94901144?w=280&h=320&fit=crop&q=75" alt="Discovery" loading="lazy" decoding="async"></div>
+                    <div class="limited-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1590736969955-71cc94901144?w=350&h=380&fit=crop&q=80" alt="Luxury Discovery Set Limited" loading="lazy" style="animation-delay: -0.8s;">
+                    </div>
                     <h3 class="limited-product-name">Luxury Discovery Set</h3>
                     <p class="limited-product-brand">TLor Collection</p>
                     <p class="limited-product-price">NLe 480</p>
-                    <button class="btn-limited-cart" data-name="Luxury Discovery Set" data-brand="TLor Collection" data-price="NLe 480" data-img="https://images.unsplash.com/photo-1590736969955-71cc94901144?w=300&h=350&fit=crop&q=75">Add to Cart →</button>
+                    <button class="btn-limited-cart" data-name="Luxury Discovery Set" data-brand="TLor Collection" data-price="NLe 480">Add to Cart →</button>
                 </div>
+
                 <div class="limited-product-card">
                     <span class="limited-badge">✨ Limited Edition</span>
-                    <div class="limited-image-wrapper"><img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?w=280&h=320&fit=crop&q=75" alt="Hamper" loading="lazy" decoding="async"></div>
+                    <div class="limited-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?w=350&h=380&fit=crop&q=80" alt="Ultimate Luxury Hamper Limited" loading="lazy" style="animation-delay: -1.6s;">
+                    </div>
                     <h3 class="limited-product-name">Ultimate Luxury Hamper</h3>
                     <p class="limited-product-brand">TLor Collection</p>
                     <p class="limited-product-price">NLe 2,850</p>
-                    <button class="btn-limited-cart" data-name="Ultimate Luxury Hamper" data-brand="TLor Collection" data-price="NLe 2,850" data-img="https://images.unsplash.com/photo-1594035910387-fea47794261f?w=300&h=350&fit=crop&q=75">Add to Cart →</button>
+                    <button class="btn-limited-cart" data-name="Ultimate Luxury Hamper" data-brand="TLor Collection" data-price="NLe 2,850">Add to Cart →</button>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Minimal Footer -->
     <footer class="minimal-footer">
         <p class="copyright">© 2026 TLor Luxury Fragrances. All rights reserved. Sierra Leone.</p>
     </footer>
 
+    <!-- CART HTML -->
     <button class="cart-fab" id="cartFab" aria-label="Open cart">
         <svg viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
-        <span class="cart-badge" id="cartBadge" style="display:none">0</span>
+        <span class="cart-badge" id="cartBadge" style="display:none;">0</span>
     </button>
-
-    <div class="popup-notice" id="popupNotice">
-        <button class="popup-notice-close" id="popupNoticeClose">✕</button>
-        <p>Popup was blocked. <span>Allow popups</span> for this site, or check your new tab.</p>
-    </div>
 
     <div class="cart-overlay" id="cartOverlay"></div>
 
@@ -699,246 +1896,509 @@
             <div class="cart-panel-title">Your Order <span id="cartCountText"></span></div>
             <button class="cart-close" id="cartClose">✕</button>
         </div>
+
         <div class="cart-items-list" id="cartItemsList">
             <div class="cart-empty" id="cartEmpty">
                 <div class="cart-empty-icon">🛒</div>
                 <p>Your cart is empty</p>
             </div>
         </div>
+
         <div class="cart-panel-footer">
             <div class="cart-total">
                 <span class="cart-total-label">Total</span>
                 <span class="cart-total-value" id="cartTotal">NLe 0</span>
             </div>
+
             <div class="cart-form" id="cartForm">
-                <input type="text" id="custName" placeholder="Your full name *" autocomplete="name">
-                <input type="tel" id="custPhone" placeholder="Your phone number *" autocomplete="tel">
-                <textarea id="custAddress" placeholder="Delivery address *"></textarea>
+                <input type="text" id="custName" placeholder="Your full name *" required>
+                <input type="tel" id="custPhone" placeholder="Your phone number *" required>
+                <textarea id="custAddress" placeholder="Delivery address *" required></textarea>
                 <p class="form-error-msg" id="formError">Please fill in all fields</p>
             </div>
+
             <button class="btn-checkout" id="btnCheckout" disabled>
                 <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
                 Send Order via WhatsApp
             </button>
-            <p class="cart-pay-note">🚚 Delivery fee depends on your location — we'll call to confirm.</p>
-            <p class="cart-pay-note">💵 <span>Pay on delivery</span> — product price + delivery fee when we arrive.</p>
-        </div>
+
+            <p class="cart-pay-note">🚚 The delivery fee depends on your location, and we'll call to confirm details.</p>
+            <p class="cart-pay-note">💵 <span>Pay on delivery</span> covering both the product price and the delivery fee when we arrive.</p>
     </div>
 
+    <!-- JAVASCRIPT -->
     <script>
-    var WA='23277416715';
+        const WHATSAPP_NUMBER = '23277416715';
 
-    function openWhatsAppPopup(text){
-        var url='https://wa.me/'+WA+'?text='+encodeURIComponent(text);
-        var w=480,h=680;
-        var dsl=window.screenLeft!==undefined?window.screenLeft:screen.left;
-        var dst=window.screenTop!==undefined?window.screenTop:screen.top;
-        var sw=window.innerWidth||screen.width;
-        var sh=window.innerHeight||screen.height;
-        var left=((sw/2)-(w/2))+dsl;
-        var top=((sh/2)-(h/2))+dst;
-        var popup=window.open(url,'tlor_whatsapp','width='+w+',height='+h+',top='+top+',left='+left+',scrollbars=yes,resizable=yes');
-        if(popup){popup.focus()}
-        else{window.open(url,'_blank');var n=document.getElementById('popupNotice');n.classList.add('show');setTimeout(function(){n.classList.remove('show')},6000)}
-    }
+        // ===== BUTTERY SMOOTH SCROLL ENGINE =====
+        (function() {
+            const html = document.documentElement;
+            // Remove CSS smooth so our engine takes full control — no conflicts
+            html.style.scrollBehavior = 'auto';
 
-    document.getElementById('popupNoticeClose').addEventListener('click',function(){document.getElementById('popupNotice').classList.remove('show')});
+            let scrollAnim = null;
 
-    function updateTabCounts(){
-        var cards=document.querySelectorAll('#productsGrid .product-card');
-        var counts={all:cards.length,women:0,men:0,unisex:0,gifts:0};
-        cards.forEach(function(c){if(counts[c.dataset.category]!==undefined)counts[c.dataset.category]++});
-        document.querySelectorAll('.category-tab').forEach(function(tab){
-            var cat=tab.dataset.category;var span=tab.querySelector('.tab-count');
-            if(span&&counts[cat]!==undefined)span.textContent='('+counts[cat]+')';
-        });
-    }
+            function smoothScrollTo(targetY, duration = 800) {
+                if (scrollAnim) cancelAnimationFrame(scrollAnim);
 
-    window.addEventListener('load',function(){setTimeout(function(){document.getElementById('preloader').classList.add('hide')},1000)});
+                const startY = window.scrollY;
+                const distance = targetY - startY;
+                // Skip if already there or tiny move
+                if (Math.abs(distance) < 2) {
+                    window.scrollTo(0, targetY);
+                    return;
+                }
+                const startTime = performance.now();
 
-    var navbar=document.getElementById('navbar');
-    window.addEventListener('scroll',function(){navbar.classList.toggle('scrolled',window.scrollY>60)},{passive:true});
+                // Ease out cubic — starts fast, lands soft with no bounce
+                function easeOutCubic(t) {
+                    return 1 - Math.pow(1 - t, 3);
+                }
 
-    /* ===== MOBILE MENU — separate div, no display:none toggle ===== */
-    var menuToggle=document.getElementById('menuToggle');
-    var mobileMenu=document.getElementById('mobileMenu');
-    menuToggle.addEventListener('click',function(){
-        var isOpen=mobileMenu.classList.toggle('open');
-        menuToggle.classList.toggle('active',isOpen);
-        document.body.style.overflow=isOpen?'hidden':'';
-    });
-    mobileMenu.querySelectorAll('a').forEach(function(a){
-        a.addEventListener('click',function(){
-            mobileMenu.classList.remove('open');
-            menuToggle.classList.remove('active');
-            document.body.style.overflow='';
-        });
-    });
-    document.addEventListener('keydown',function(e){
-        if(e.key==='Escape'&&mobileMenu.classList.contains('open')){
-            mobileMenu.classList.remove('open');
-            menuToggle.classList.remove('active');
-            document.body.style.overflow='';
+                function step(now) {
+                    const elapsed = now - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    const eased = easeOutCubic(progress);
+                    window.scrollTo(0, startY + distance * eased);
+
+                    if (progress < 1) {
+                        scrollAnim = requestAnimationFrame(step);
+                    } else {
+                        scrollAnim = null;
+                    }
+                }
+
+                scrollAnim = requestAnimationFrame(step);
+            }
+
+            // Override all anchor clicks for smooth scroll
+            document.addEventListener('click', function(e) {
+                const link = e.target.closest('a[href^="#"]');
+                if (!link) return;
+                const id = link.getAttribute('href').substring(1);
+                if (!id) return;
+                const target = document.getElementById(id);
+                if (target) {
+                    e.preventDefault();
+                    const y = target.getBoundingClientRect().top + window.scrollY - 80;
+                    smoothScrollTo(y, 700);
+                }
+            });
+
+            // Expose globally so deep linking uses it too
+            window._smoothScrollTo = smoothScrollTo;
+        })();
+
+        // ===== CART SYSTEM =====
+        let cart = [];
+
+        const cartFab = document.getElementById('cartFab');
+        const cartBadge = document.getElementById('cartBadge');
+        const cartOverlay = document.getElementById('cartOverlay');
+        const cartPanel = document.getElementById('cartPanel');
+        const cartClose = document.getElementById('cartClose');
+        const cartItemsList = document.getElementById('cartItemsList');
+        const cartEmpty = document.getElementById('cartEmpty');
+        const cartCountText = document.getElementById('cartCountText');
+        const cartTotal = document.getElementById('cartTotal');
+        const btnCheckout = document.getElementById('btnCheckout');
+        const formError = document.getElementById('formError');
+
+        function openCart() {
+            cartOverlay.classList.add('open');
+            cartPanel.classList.add('open');
+            document.body.style.overflow = 'hidden';
         }
-    });
 
-    document.getElementById('btnConsultation').addEventListener('click',function(e){
-        e.preventDefault();
-        openWhatsAppPopup("Hi TLor! I'd like to book a fragrance consultation. Can you help me find my signature scent?");
-    });
+        function closeCart() {
+            cartOverlay.classList.remove('open');
+            cartPanel.classList.remove('open');
+            document.body.style.overflow = '';
+        }
 
-    var searchInput=document.getElementById('searchInput');
-    var searchClear=document.getElementById('searchClear');
-    var resultsCount=document.getElementById('resultsCount');
-    var noResults=document.getElementById('noResults');
-    var productCards=document.querySelectorAll('.product-card');
+        cartFab.addEventListener('click', openCart);
+        cartOverlay.addEventListener('click', closeCart);
+        cartClose.addEventListener('click', closeCart);
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeCart(); });
 
-    function doSearch(){
-        var q=searchInput.value.toLowerCase().trim();
-        searchClear.classList.toggle('visible',q.length>0);
-        var n=0;
-        productCards.forEach(function(c){
-            var match=!q||c.dataset.name.toLowerCase().indexOf(q)!==-1||c.dataset.brand.toLowerCase().indexOf(q)!==-1||c.dataset.notes.toLowerCase().indexOf(q)!==-1;
-            c.classList.toggle('hidden',!match);if(match)n++;
+        function updateCartUI() {
+            const totalItems = cart.reduce((s, i) => s + i.qty, 0);
+
+            if (totalItems > 0) {
+                cartBadge.style.display = 'flex';
+                cartBadge.textContent = totalItems;
+                cartBadge.classList.remove('pop');
+                void cartBadge.offsetWidth;
+                cartBadge.classList.add('pop');
+                cartFab.classList.add('visible');
+            } else {
+                cartBadge.style.display = 'none';
+                cartFab.classList.remove('visible');
+            }
+
+            cartCountText.textContent = totalItems > 0 ? `(${totalItems} item${totalItems > 1 ? 's' : ''})` : '';
+
+            if (cart.length === 0) {
+                cartEmpty.style.display = 'block';
+                btnCheckout.disabled = true;
+            } else {
+                cartEmpty.style.display = 'none';
+                btnCheckout.disabled = false;
+            }
+
+            const existingItems = cartItemsList.querySelectorAll('.cart-item');
+            existingItems.forEach(el => el.remove());
+
+            cart.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'cart-item';
+                div.innerHTML = `
+                    <img class="cart-item-img" src="${item.img}" alt="${item.name}">
+                    <div class="cart-item-info">
+                        <div class="cart-item-name">${item.name}</div>
+                        <div class="cart-item-brand">${item.brand}</div>
+                        <div class="cart-item-price">${item.price}</div>
+                    </div>
+                    <div class="cart-item-actions">
+                        <button class="qty-btn" data-action="minus" data-id="${item.id}">−</button>
+                        <span class="qty-num">${item.qty}</span>
+                        <button class="qty-btn" data-action="plus" data-id="${item.id}">+</button>
+                        <button class="cart-item-remove" data-action="remove" data-id="${item.id}">✕</button>
+                    </div>
+                `;
+                cartItemsList.appendChild(div);
+            });
+
+            const totalRaw = cart.reduce((s, i) => {
+                const num = parseInt(i.price.replace(/[^0-9]/g, ''), 10);
+                return s + (num * i.qty);
+            }, 0);
+            cartTotal.textContent = 'NLe ' + totalRaw.toLocaleString();
+
+            updateProductButtons();
+        }
+
+        function updateProductButtons() {
+            document.querySelectorAll('.btn-add-cart, .btn-limited-cart').forEach(btn => {
+                const card = btn.closest('.product-card, .limited-product-card');
+                let name;
+                if (btn.dataset.name) {
+                    name = btn.dataset.name;
+                } else if (card) {
+                    name = card.dataset.name;
+                }
+                if (!name) return;
+
+                const inCart = cart.find(i => i.name === name);
+                if (inCart) {
+                    btn.classList.add('in-cart');
+                    btn.textContent = `In Cart (${inCart.qty}) ✓`;
+                } else {
+                    btn.classList.remove('in-cart');
+                    btn.textContent = 'Add to Cart →';
+                }
+            });
+        }
+
+        function addToCart(name, brand, price, img) {
+            const existing = cart.find(i => i.name === name);
+            if (existing) {
+                existing.qty++;
+            } else {
+                cart.push({ id: Date.now() + Math.random(), name, brand, price, img, qty: 1 });
+            }
+            updateCartUI();
+        }
+
+        cartItemsList.addEventListener('click', e => {
+            const btn = e.target.closest('[data-action]');
+            if (!btn) return;
+            const action = btn.dataset.action;
+            const id = parseFloat(btn.dataset.id);
+            const item = cart.find(i => i.id === id);
+            if (!item) return;
+
+            if (action === 'plus') {
+                item.qty++;
+            } else if (action === 'minus') {
+                item.qty--;
+                if (item.qty <= 0) {
+                    cart = cart.filter(i => i.id !== id);
+                }
+            } else if (action === 'remove') {
+                cart = cart.filter(i => i.id !== id);
+            }
+
+            updateCartUI();
         });
-        resultsCount.innerHTML='<span>'+n+'</span> '+(n===1?'Product':'Products')+' Found';
-        noResults.classList.toggle('visible',n===0&&q!=='');
-    }
-    searchInput.addEventListener('input',doSearch);
-    searchClear.addEventListener('click',function(){searchInput.value='';doSearch();searchInput.focus()});
 
-    var categoryTabs=document.querySelectorAll('.category-tab');
-    categoryTabs.forEach(function(tab){
-        tab.addEventListener('click',function(){
-            categoryTabs.forEach(function(t){t.classList.remove('active')});
+        document.querySelectorAll('.btn-add-cart').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const card = this.closest('.product-card');
+                if (!card) return;
+                const img = card.querySelector('.product-image-wrapper img');
+                addToCart(
+                    card.dataset.name,
+                    card.dataset.brand,
+                    card.dataset.price,
+                    img ? img.src : ''
+                );
+            });
+        });
+
+        document.querySelectorAll('.btn-limited-cart').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const card = this.closest('.limited-product-card');
+                const img = card ? card.querySelector('.limited-image-wrapper img') : null;
+                addToCart(
+                    this.dataset.name,
+                    this.dataset.brand,
+                    this.dataset.price,
+                    img ? img.src : ''
+                );
+            });
+        });
+
+        // ===== CHECKOUT — SEND TO WHATSAPP AS POPUP (mobile + desktop) =====
+        btnCheckout.addEventListener('click', () => {
+            const name = document.getElementById('custName').value.trim();
+            const phone = document.getElementById('custPhone').value.trim();
+            const address = document.getElementById('custAddress').value.trim();
+
+            let hasError = false;
+            ['custName', 'custPhone', 'custAddress'].forEach(id => {
+                const el = document.getElementById(id);
+                if (!el.value.trim()) {
+                    el.classList.add('error');
+                    hasError = true;
+                } else {
+                    el.classList.remove('error');
+                }
+            });
+
+            if (hasError) {
+                formError.classList.add('show');
+                return;
+            }
+            formError.classList.remove('show');
+
+            let msg = `🛍️ *NEW ORDER — TLor Luxury Fragrances*\n\n`;
+            msg += `👤 *Customer:* ${name}\n`;
+            msg += `📱 *Phone:* ${phone}\n`;
+            msg += `📍 *Address:* ${address}\n\n`;
+            msg += `━━━━━━━━━━━━━━━━━━\n`;
+            msg += `📦 *ORDER DETAILS:*\n\n`;
+
+            cart.forEach((item, i) => {
+                msg += `${i + 1}. *${item.name}*\n`;
+                msg += `   Brand: ${item.brand}\n`;
+                msg += `   Qty: ${item.qty} × ${item.price}\n`;
+                if (item.img) {
+                    msg += `   🖼️ View: ${item.img}\n`;
+                }
+                msg += `\n`;
+            });
+
+            const totalRaw = cart.reduce((s, i) => {
+                const num = parseInt(i.price.replace(/[^0-9]/g, ''), 10);
+                return s + (num * i.qty);
+            }, 0);
+
+            msg += `━━━━━━━━━━━━━━━━━━\n`;
+            msg += `💰 *TOTAL: NLe ${totalRaw.toLocaleString()}*\n\n`;
+            msg += `_Order from TLor website_`;
+
+            const encoded = encodeURIComponent(msg);
+
+            // Opens WhatsApp as a popup on both mobile and desktop
+            // Mobile browsers will open it as a new tab — close it to return here
+            const popup = window.open(
+                `https://wa.me/${WHATSAPP_NUMBER}?text=${encoded}`,
+                'whatsapp_order',
+                'width=500,height=700,left=50,top=50,scrollbars=yes'
+            );
+
+            // If popup was blocked, fallback to direct link
+            if (!popup) {
+                window.location.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encoded}`;
+            }
+
+            // Clear cart immediately — site stays ready when they return
+            cart = [];
+            updateCartUI();
+            document.getElementById('custName').value = '';
+            document.getElementById('custPhone').value = '';
+            document.getElementById('custAddress').value = '';
+            closeCart();
+        });
+
+        ['custName', 'custPhone', 'custAddress'].forEach(id => {
+            document.getElementById(id).addEventListener('input', function() {
+                this.classList.remove('error');
+                formError.classList.remove('show');
+            });
+        });
+
+        // ===== PRELOADER =====
+        window.addEventListener('load', () => {
+            setTimeout(() => document.getElementById('preloader').classList.add('fade-out'), 2600);
+        });
+
+        // ===== NAVBAR SCROLL =====
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 80);
+        });
+
+        // ===== MOBILE MENU =====
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinksMenu = document.querySelector('.nav-links');
+        
+        if (menuToggle && navLinksMenu) {
+            menuToggle.addEventListener('click', () => {
+                menuToggle.classList.toggle('active');
+                navLinksMenu.classList.toggle('mobile-active');
+                document.body.style.overflow = navLinksMenu.classList.contains('mobile-active') ? 'hidden' : '';
+            });
+
+            navLinksMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navLinksMenu.classList.remove('mobile-active');
+                document.body.style.overflow = '';
+            }));
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && navLinksMenu.classList.contains('mobile-active')) {
+                    menuToggle.classList.remove('active');
+                    navLinksMenu.classList.remove('mobile-active');
+                    document.body.style.overflow = '';
+                }
+            });
+        }
+
+        // ===== SEARCH =====
+        const searchInput = document.getElementById('searchInput');
+        const searchClear = document.getElementById('searchClear');
+        const resultsCount = document.getElementById('resultsCount');
+        const noResults = document.getElementById('noResults');
+        const productCards = document.querySelectorAll('.product-card');
+
+        function performSearch() {
+            const query = searchInput.value.toLowerCase().trim();
+            let visibleCount = 0;
+            searchClear.classList.toggle('visible', query.length > 0);
+
+            productCards.forEach(card => {
+                const name = card.dataset.name.toLowerCase();
+                const brand = card.dataset.brand.toLowerCase();
+                const notes = card.dataset.notes.toLowerCase();
+                if (query === '' || name.includes(query) || brand.includes(query) || notes.includes(query)) {
+                    card.classList.remove('hidden');
+                    visibleCount++;
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+
+            resultsCount.innerHTML = `<span>${visibleCount}</span> ${visibleCount === 1 ? 'Product' : 'Products'} Found`;
+            noResults.classList.toggle('visible', visibleCount === 0 && query !== '');
+        }
+
+        searchInput.addEventListener('input', performSearch);
+        searchClear.addEventListener('click', () => {
+            searchInput.value = '';
+            searchClear.classList.remove('visible');
+            performSearch();
+            searchInput.focus();
+        });
+
+        // ===== CATEGORY FILTER =====
+        const categoryTabs = document.querySelectorAll('.category-tab');
+
+        categoryTabs.forEach(tab => tab.addEventListener('click', () => {
+            categoryTabs.forEach(t => t.classList.remove('active'));
             tab.classList.add('active');
-            var cat=tab.dataset.category;var n=0;
-            productCards.forEach(function(c){var show=cat==='all'||c.dataset.category===cat;c.classList.toggle('hidden',!show);if(show)n++});
-            var label=cat==='all'?'All Categories':cat.charAt(0).toUpperCase()+cat.slice(1);
-            resultsCount.innerHTML='<span>'+n+'</span> Products in '+label;
-            noResults.classList.remove('visible');searchInput.value='';searchClear.classList.remove('visible');
-        });
-    });
 
-    var cart=[];
-    var cartFab=document.getElementById('cartFab');
-    var cartBadge=document.getElementById('cartBadge');
-    var cartOverlay=document.getElementById('cartOverlay');
-    var cartPanel=document.getElementById('cartPanel');
-    var cartClose=document.getElementById('cartClose');
-    var cartItemsList=document.getElementById('cartItemsList');
-    var cartEmpty=document.getElementById('cartEmpty');
-    var cartCountText=document.getElementById('cartCountText');
-    var cartTotalEl=document.getElementById('cartTotal');
-    var btnCheckout=document.getElementById('btnCheckout');
-    var formError=document.getElementById('formError');
+            const selectedCategory = tab.dataset.category;
+            let visibleCount = 0;
 
-    function openCart(){cartOverlay.classList.add('open');cartPanel.classList.add('open');document.body.style.overflow='hidden'}
-    function closeCart(){cartOverlay.classList.remove('open');cartPanel.classList.remove('open');document.body.style.overflow=''}
-    cartFab.addEventListener('click',openCart);
-    cartOverlay.addEventListener('click',closeCart);
-    cartClose.addEventListener('click',closeCart);
-    document.addEventListener('keydown',function(e){if(e.key==='Escape')closeCart()});
+            productCards.forEach(card => {
+                if (selectedCategory === 'all' || card.dataset.category === selectedCategory) {
+                    card.classList.remove('hidden');
+                    visibleCount++;
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
 
-    function updateCartUI(){
-        var total=cart.reduce(function(s,i){return s+i.qty},0);
-        if(total>0){cartBadge.style.display='flex';cartBadge.textContent=total;cartBadge.classList.remove('pop');void cartBadge.offsetWidth;cartBadge.classList.add('pop');cartFab.classList.add('visible')}
-        else{cartBadge.style.display='none';cartFab.classList.remove('visible')}
-        cartCountText.textContent=total>0?'('+total+' item'+(total>1?'s':'')+')':'';
-        cartEmpty.style.display=cart.length===0?'block':'none';
-        btnCheckout.disabled=cart.length===0;
-        cartItemsList.querySelectorAll('.cart-item').forEach(function(el){el.remove()});
-        cart.forEach(function(item){
-            var d=document.createElement('div');d.className='cart-item';
-            d.innerHTML='<img class="cart-item-img" src="'+item.img+'" alt=""><div class="cart-item-info"><div class="cart-item-name">'+item.name+'</div><div class="cart-item-brand">'+item.brand+'</div><div class="cart-item-price">'+item.price+'</div></div><div class="cart-item-actions"><button class="qty-btn" data-act="minus" data-id="'+item.id+'">&minus;</button><span class="qty-num">'+item.qty+'</span><button class="qty-btn" data-act="plus" data-id="'+item.id+'">+</button><button class="cart-item-remove" data-act="remove" data-id="'+item.id+'">&#10005;</button></div>';
-            cartItemsList.appendChild(d);
-        });
-        var raw=cart.reduce(function(s,i){return s+(parseInt(i.price.replace(/[^0-9]/g,''),10)*i.qty)},0);
-        cartTotalEl.textContent='NLe '+raw.toLocaleString();
-        syncButtons();
-    }
+            resultsCount.innerHTML = `<span>${visibleCount}</span> ${visibleCount === 1 ? 'Product' : 'Products'} in ${selectedCategory === 'all' ? 'All Categories' : selectedCategory.charAt(0).toUpperCase() + selectedCategory.slice(1)}`;
+            noResults.classList.remove('visible');
+            searchInput.value = '';
+            searchClear.classList.remove('visible');
+        }));
 
-    function syncButtons(){
-        document.querySelectorAll('.btn-add-cart,.btn-limited-cart').forEach(function(btn){
-            var name=btn.dataset.name;if(!name){var card=btn.closest('.product-card');if(card)name=card.dataset.name}if(!name)return;
-            var inCart=cart.find(function(i){return i.name===name});
-            if(inCart){btn.classList.add('in-cart');btn.textContent='In Cart ('+inCart.qty+') \u2713'}
-            else{btn.classList.remove('in-cart');btn.textContent='Add to Cart \u2192'}
-        });
-    }
-
-    function addToCart(name,brand,price,img){
-        var ex=cart.find(function(i){return i.name===name});
-        if(ex)ex.qty++;else cart.push({id:Date.now()+Math.random(),name:name,brand:brand,price:price,img:img,qty:1});
-        updateCartUI();
-    }
-
-    cartItemsList.addEventListener('click',function(e){
-        var btn=e.target.closest('[data-act]');if(!btn)return;
-        var id=parseFloat(btn.dataset.id);var item=cart.find(function(i){return i.id===id});if(!item)return;
-        if(btn.dataset.act==='plus')item.qty++;
-        else if(btn.dataset.act==='minus'){item.qty--;if(item.qty<=0)cart=cart.filter(function(i){return i.id!==id})}
-        else if(btn.dataset.act==='remove')cart=cart.filter(function(i){return i.id!==id});
-        updateCartUI();
-    });
-
-    document.querySelectorAll('.btn-add-cart').forEach(function(btn){
-        btn.addEventListener('click',function(e){e.stopPropagation();var card=this.closest('.product-card');if(!card)return;var img=card.querySelector('.product-image-wrapper img');addToCart(card.dataset.name,card.dataset.brand,card.dataset.price,img?img.src:'')});
-    });
-
-    document.querySelectorAll('.btn-limited-cart').forEach(function(btn){
-        btn.addEventListener('click',function(e){e.stopPropagation();addToCart(this.dataset.name,this.dataset.brand,this.dataset.price,this.dataset.img||'')});
-    });
-
-    /* ===== CHECKOUT → CLEAN FORMAT ===== */
-    btnCheckout.addEventListener('click',function(){
-        var name=document.getElementById('custName').value.trim();
-        var phone=document.getElementById('custPhone').value.trim();
-        var address=document.getElementById('custAddress').value.trim();
-        var err=false;
-        ['custName','custPhone','custAddress'].forEach(function(id){var el=document.getElementById(id);if(!el.value.trim()){el.classList.add('error');err=true}else{el.classList.remove('error')}});
-        if(err){formError.classList.add('show');return}
-        formError.classList.remove('show');
-
-        var msg='🛍️ NEW ORDER — TLor Luxury Fragrances\n\n';
-        msg+='👤 Customer: '+name+'\n';
-        msg+='📱 Phone: '+phone+'\n';
-        msg+='📍 Address: '+address+'\n\n';
-        msg+='━━━━━━━━━━━━━━━━━━\n';
-        msg+='📦 ORDER DETAILS:\n\n';
-
-        cart.forEach(function(item,i){
-            msg+=(i+1)+'. '+item.name+'\n';
-            msg+='   Brand: '+item.brand+'\n';
-            msg+='   Qty: '+item.qty+' x '+item.price+'\n';
-            if(item.img)msg+='   Image: '+item.img+'\u200B\n';            
-            msg+='\n';
+        // ===== 3D TILT =====
+        document.querySelectorAll('.product-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                card.style.setProperty('--mouse-x', `${((e.clientX - rect.left) / rect.width) * 100}%`);
+                card.style.setProperty('--mouse-y', `${((e.clientY - rect.top) / rect.height) * 100}%`);
+            });
         });
 
-        var raw=cart.reduce(function(s,i){return s+(parseInt(i.price.replace(/[^0-9]/g,''),10)*i.qty)},0);
-        msg+='━━━━━━━━━━━━━━━━━━\n';
-        msg+='💰 TOTAL: NLe '+raw.toLocaleString()+'\n\n';
-        msg+=' 🛒 Order from TLor website';
+        // ===== INTERSECTION OBSERVER =====
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
 
-        openWhatsAppPopup(msg);
-        cart=[];updateCartUI();
-        document.getElementById('custName').value='';document.getElementById('custPhone').value='';document.getElementById('custAddress').value='';
-        closeCart();
-    });
+        document.querySelectorAll('.product-card, .limited-product-card, .consultation-header').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.7s cubic-bezier(0.23, 1, 0.32, 1)';
+            observer.observe(el);
+        });
 
-    ['custName','custPhone','custAddress'].forEach(function(id){document.getElementById(id).addEventListener('input',function(){this.classList.remove('error');formError.classList.remove('show')})});
+        document.querySelectorAll('.product-card').forEach((card, index) => {
+            card.style.transitionDelay = `${index * 0.05}s`;
+        });
 
-    /* ===== DEEP LINKING ===== */
-    window.addEventListener('load',function(){
-        var hash=window.location.hash.substring(1);
-        if(['women','men','unisex','gifts'].indexOf(hash)!==-1){
-            var t=document.querySelector('.category-tab[data-category="'+hash+'"]');
-            if(t){t.click();setTimeout(function(){window.scrollTo({top:document.querySelector('.search-container').getBoundingClientRect().top+window.scrollY-90,behavior:'smooth'})},300);history.replaceState(null,'',window.location.pathname)}
-        }
-    });
+        document.querySelectorAll('.limited-product-card').forEach((card, index) => {
+            card.style.transitionDelay = `${0.3 + index * 0.15}s`;
+        });
 
-    updateTabCounts();
-    doSearch();
+        // ===== DEEP LINKING — uses smooth scroll engine =====
+        window.addEventListener('load', () => {
+            const hash = window.location.hash.substring(1);
+
+            if (['women', 'men', 'unisex', 'gifts'].includes(hash)) {
+                const targetTab = document.querySelector(`.category-tab[data-category="${hash}"]`);
+
+                if (targetTab) {
+                    targetTab.click();
+
+                    setTimeout(() => {
+                        const searchBox = document.querySelector('.search-container');
+                        if (searchBox) {
+                            const navHeight = navbar.offsetHeight;
+                            const searchTop = searchBox.getBoundingClientRect().top + window.scrollY;
+                            const target = searchTop - navHeight - 20;
+                            // Use the custom smooth scroll engine instead of native
+                            window._smoothScrollTo(target, 800);
+                        }
+                    }, 500);
+
+                    history.replaceState(null, '', window.location.pathname);
+                }
+            }
+        });
     </script>
 </body>
 </html>
