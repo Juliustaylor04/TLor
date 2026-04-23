@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta name="referrer" content="no-referrer">
+    <title>Delivery & Pickup | TLor Luxury Perfumes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+        :root{--gold:#d4a84b;--gold-light:#f0d9a0;--gold-dark:#996515;--midnight-blue:#1a2332;--deep-navy:#0f1621;--warm-white:#f5f1eb;--muted-text:#b8c4d0}
+        html{scroll-behavior:auto;scrollbar-width:thin;scrollbar-color:var(--gold) var(--midnight-blue)}
+        body{font-family:'Montserrat',sans-serif;background:var(--deep-navy);color:var(--warm-white);overflow-x:hidden;cursor:default;line-height:1.6;width:100%;-webkit-text-size-adjust:100%;touch-action:manipulation;-webkit-overflow-scrolling:touch}
+
+        .preloader{position:fixed;top:0;left:0;width:100%;height:100%;background:var(--deep-navy);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;transition:opacity .4s ease,visibility .4s ease}
+        .preloader.fade-out{opacity:0;visibility:hidden;pointer-events:none}
+        .preloader-logo{font-family:'Cormorant Garamond',serif;font-size:5rem;font-weight:300;letter-spacing:15px;color:var(--gold);margin-bottom:40px}
+        .preloader-line{width:200px;height:2px;background:rgba(255,255,255,.1);border-radius:2px;overflow:hidden;position:relative}
+        .preloader-progress{position:absolute;left:0;top:0;height:100%;width:0%;background:var(--gold);animation:loadProgress 1.2s ease forwards}
+        @keyframes loadProgress{to{width:100%}}
+        .preloader-text{margin-top:25px;font-size:.75rem;letter-spacing:6px;text-transform:uppercase;color:rgba(255,255,255,.4);font-weight:300}
+
+        nav{position:fixed;top:0;left:0;right:0;width:100%;padding:22px 24px;display:flex;justify-content:space-between;align-items:center;z-index:10000;transition:box-shadow .3s ease;max-width:100vw;overflow:visible;-webkit-transform:translateZ(0);transform:translateZ(0);will-change:auto}
+        nav.scrolled{padding-top:14px;padding-bottom:14px;background:rgba(15,22,33,.97);box-shadow:0 8px 40px rgba(0,0,0,.5)}
+        .nav-logo{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:400;letter-spacing:8px;color:var(--gold);text-decoration:none;position:relative;transition:all .4s ease;flex-shrink:0;line-height:1}
+        .nav-logo::after{content:'';position:absolute;bottom:-4px;left:0;width:100%;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);transform:scaleX(0);transition:transform .4s ease}
+        .nav-logo:hover::after{transform:scaleX(1)}
+        .nav-links{display:flex;gap:40px;list-style:none;align-items:center}
+        .nav-links a{color:var(--warm-white);text-decoration:none;font-size:.8rem;font-weight:400;letter-spacing:3px;text-transform:uppercase;position:relative;padding:6px 0;transition:all .4s ease;white-space:nowrap}
+        .nav-links a::before{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:0;height:1px;background:var(--gold);transition:width .4s ease}
+        .nav-links a:hover{color:var(--gold);letter-spacing:5px}
+        .nav-links a:hover::before{width:100%}
+        .menu-toggle{display:none;flex-direction:column;justify-content:center;align-items:center;width:44px;height:44px;cursor:pointer;z-index:10002;background:none;border:1px solid rgba(212,168,75,.2);border-radius:8px;padding:0;flex-shrink:0;transition:border-color .3s ease}
+        .menu-toggle:hover{border-color:rgba(212,168,75,.5)}
+        .menu-toggle span{width:22px;height:2px;background:var(--gold);transition:all .4s ease;display:block;border-radius:2px}
+        .menu-toggle.active{border-color:rgba(212,168,75,.5)}
+        .menu-toggle.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+        .menu-toggle.active span:nth-child(2){opacity:0;transform:scaleX(0)}
+        .menu-toggle.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+
+        .mobile-menu{display:none;position:fixed;inset:0;width:100%;height:100%;height:100dvh;background:rgba(15,22,33,.98);z-index:9999;flex-direction:column;align-items:center;justify-content:center;gap:40px}
+        .mobile-menu.open{display:flex}
+        .mobile-menu a{color:var(--warm-white);text-decoration:none;font-size:1.2rem;font-weight:400;letter-spacing:5px;text-transform:uppercase;transition:color .2s ease}
+        .mobile-menu a:hover{color:var(--gold)}
+
+        .page-hero{min-height:40vh;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;padding:160px 24px 80px;text-align:center;overflow:hidden}
+        .page-hero-bg{position:absolute;inset:0;z-index:0}
+        .hero-orb{position:absolute;border-radius:50%;pointer-events:none}
+        .hero-orb-1{width:500px;height:500px;background:rgba(212,168,75,.08);top:-20%;right:-10%}
+        .hero-orb-2{width:400px;height:400px;background:rgba(44,62,80,.12);bottom:-15%;left:-10%}
+        .grid-overlay{position:absolute;inset:0;background-image:linear-gradient(rgba(212,168,75,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(212,168,75,.03) 1px,transparent 1px);background-size:80px 80px}
+        .page-hero-content{position:relative;z-index:10;max-width:800px}
+        .page-tag{display:inline-block;font-size:.72rem;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:20px;position:relative;padding:0 24px}
+        .page-tag::before,.page-tag::after{content:'';position:absolute;top:50%;width:20px;height:1px}
+        .page-tag::before{left:0;background:linear-gradient(90deg,transparent,var(--gold))}
+        .page-tag::after{right:0;background:linear-gradient(90deg,var(--gold),transparent)}
+        .page-title{font-family:'Cormorant Garamond',serif;font-size:4rem;font-weight:300;letter-spacing:-.5px;margin-bottom:20px;line-height:1.1}
+        .page-subtitle{font-size:1.05rem;color:var(--muted-text);font-weight:300;line-height:1.8;max-width:600px;margin:0 auto}
+
+        .content-section{padding:70px 24px;position:relative}
+        .content-section:nth-child(even){background:linear-gradient(180deg,var(--deep-navy) 0%,var(--midnight-blue) 50%,var(--deep-navy) 100%)}
+        .section-inner{max-width:1000px;margin:0 auto}
+        .section-heading{text-align:center;margin-bottom:55px}
+        .section-heading .page-tag{display:block;margin-bottom:18px}
+        .section-heading h2{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:300;line-height:1.15;margin-bottom:14px}
+        .section-heading p{font-size:.95rem;color:var(--muted-text);font-weight:300;max-width:500px;margin:0 auto;line-height:1.8}
+
+        .option-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:30px}
+        .option-card{position:relative;background:linear-gradient(145deg,rgba(26,35,50,.8),rgba(15,22,33,.95));border:1px solid rgba(212,168,75,.12);border-radius:22px;padding:38px 30px;transition:border-color .4s ease;-webkit-transform:translateZ(0);transform:translateZ(0)}
+        .option-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-light),var(--gold));opacity:0;transition:opacity .4s ease}
+        .option-card:hover{border-color:rgba(212,168,75,.35)}
+        .option-card:hover::before{opacity:1}
+        .option-icon{font-size:2.8rem;margin-bottom:20px;display:block}
+        .option-card h3{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:500;margin-bottom:12px;color:var(--warm-white);transition:color .3s ease}
+        .option-card:hover h3{color:var(--gold)}
+        .option-card p{font-size:.88rem;color:var(--muted-text);font-weight:300;line-height:1.8;margin-bottom:18px}
+        .option-details{list-style:none}
+        .option-details li{padding:8px 0;border-bottom:1px solid rgba(212,168,75,.06);font-size:.84rem;color:var(--muted-text);font-weight:300;display:flex;align-items:center;gap:10px}
+        .option-details li:last-child{border-bottom:none}
+        .option-details li .check{color:var(--gold);font-size:.9rem;flex-shrink:0}
+
+        .fee-notice{max-width:600px;margin:0 auto;text-align:center;padding:24px 28px;background:rgba(212,168,75,.06);border:1px solid rgba(212,168,75,.15);border-radius:16px}
+        .fee-notice p{font-size:.88rem;color:var(--muted-text);font-weight:300;line-height:1.8}
+        .fee-notice p strong{color:var(--gold);font-weight:500}
+
+        .timeline{position:relative;max-width:700px;margin:0 auto;padding-left:40px}
+        .timeline::before{content:'';position:absolute;left:14px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--gold),rgba(212,168,75,.1));border-radius:2px}
+        .timeline-step{position:relative;margin-bottom:40px}
+        .timeline-step:last-child{margin-bottom:0}
+        .timeline-dot{position:absolute;left:-33px;top:4px;width:18px;height:18px;border-radius:50%;background:var(--deep-navy);border:2px solid var(--gold);z-index:2;transition:all .3s ease}
+        .timeline-step:hover .timeline-dot{background:var(--gold);box-shadow:0 0 20px rgba(212,168,75,.5)}
+        .timeline-step h4{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:500;color:var(--warm-white);margin-bottom:6px;transition:color .3s ease}
+        .timeline-step:hover h4{color:var(--gold)}
+        .timeline-step p{font-size:.88rem;color:var(--muted-text);font-weight:300;line-height:1.8}
+        .timeline-step .time-badge{display:inline-block;margin-top:8px;padding:4px 12px;background:rgba(212,168,75,.08);border:1px solid rgba(212,168,75,.15);border-radius:20px;font-size:.7rem;color:var(--gold);letter-spacing:1px;text-transform:uppercase;font-weight:500}
+
+        .faq-list{max-width:750px;margin:0 auto}
+        .faq-item{border:1px solid rgba(212,168,75,.1);border-radius:16px;margin-bottom:14px;overflow:hidden;background:linear-gradient(145deg,rgba(26,35,50,.5),rgba(15,22,33,.7));transition:border-color .4s ease}
+        .faq-item:hover{border-color:rgba(212,168,75,.25)}
+        .faq-item.open{border-color:rgba(212,168,75,.3);background:linear-gradient(145deg,rgba(26,35,50,.7),rgba(15,22,33,.9))}
+        .faq-question{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;cursor:pointer;gap:16px;transition:all .3s ease;-webkit-tap-highlight-color:transparent}
+        .faq-question h4{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:500;color:var(--warm-white);transition:color .3s ease;flex:1}
+        .faq-item.open .faq-question h4{color:var(--gold)}
+        .faq-arrow{width:28px;height:28px;border-radius:50%;border:1px solid rgba(212,168,75,.2);display:flex;align-items:center;justify-content:center;transition:all .4s ease;flex-shrink:0;font-size:.8rem;color:var(--gold)}
+        .faq-item.open .faq-arrow{transform:rotate(180deg);background:rgba(212,168,75,.15);border-color:var(--gold)}
+        .faq-answer{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.23,1,.32,1)}
+        .faq-answer-inner{padding:0 24px 22px;font-size:.88rem;color:var(--muted-text);font-weight:300;line-height:1.85}
+
+        .cta-banner{padding:80px 24px;text-align:center;position:relative;overflow:hidden}
+        .cta-banner-bg{position:absolute;inset:0;background:linear-gradient(135deg,rgba(212,168,75,.08) 0%,rgba(15,22,33,.95) 50%,rgba(212,168,75,.05) 100%)}
+        .cta-banner::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+        .cta-banner::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+        .cta-content{position:relative;z-index:10}
+        .cta-content h2{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:300;margin-bottom:16px}
+        .cta-content p{font-size:1rem;color:var(--muted-text);font-weight:300;margin-bottom:30px;max-width:500px;margin-left:auto;margin-right:auto;line-height:1.8}
+        .btn-primary{display:inline-flex;align-items:center;gap:12px;padding:17px 36px;background:linear-gradient(135deg,var(--gold) 0%,var(--gold-dark) 100%);color:var(--deep-navy);text-decoration:none;font-size:.8rem;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;border:none;border-radius:60px;cursor:pointer;transition:all .5s cubic-bezier(.23,1,.32,1);position:relative;overflow:hidden;box-shadow:0 15px 45px rgba(212,168,75,.3);white-space:nowrap}
+        .btn-primary::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.4),transparent);transition:left .7s ease}
+        .btn-primary:hover{transform:translateY(-5px) scale(1.02);box-shadow:0 25px 60px rgba(212,168,75,.45)}
+        .btn-primary:hover::before{left:100%}
+
+        .notice-box{max-width:750px;margin:0 auto;padding:28px 30px;background:rgba(212,168,75,.06);border:1px solid rgba(212,168,75,.18);border-radius:18px;display:flex;gap:18px;align-items:flex-start}
+        .notice-icon{font-size:1.8rem;flex-shrink:0;margin-top:2px}
+        .notice-box h4{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:500;color:var(--gold);margin-bottom:8px}
+        .notice-box p{font-size:.85rem;color:var(--muted-text);font-weight:300;line-height:1.8}
+
+        .minimal-footer{padding:30px 24px;background:var(--deep-navy);border-top:1px solid rgba(212,168,75,.08);text-align:center}
+        .copyright{color:var(--muted-text);font-size:.8rem;font-weight:300}
+
+        /* Desktop-only heavy effects */
+        @media(min-width:950px){
+            .hero-orb-1{background:radial-gradient(circle,rgba(212,168,75,.25) 0%,transparent 70%);filter:blur(120px);animation:orbFloat 15s ease-in-out infinite}
+            .hero-orb-2{background:radial-gradient(circle,rgba(44,62,80,.5) 0%,transparent 70%);filter:blur(120px);animation:orbFloat 18s ease-in-out infinite reverse}
+            @keyframes orbFloat{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(40px,-60px) scale(1.1)}}
+            .grid-overlay{mask-image:radial-gradient(ellipse at center,black 30%,transparent 70%);-webkit-mask-image:radial-gradient(ellipse at center,black 30%,transparent 70%)}
+            .option-card:hover{transform:translateY(-10px);box-shadow:0 30px 60px rgba(0,0,0,.4),0 0 40px rgba(212,168,75,.08)}
+            .option-card:hover .option-icon{filter:drop-shadow(0 4px 12px rgba(212,168,75,.3))}
+        }
+        @media print{body{display:none!important}html::after{content:"© TLor Luxury Fragrances — All Rights Reserved";display:block;padding:100px;text-align:center;font-size:3rem;color:#d4a84b;font-family:serif}}
+        @media(max-width:768px){
+            html{scrollbar-width:none;-ms-overflow-style:none}
+            ::-webkit-scrollbar{display:none}
+            nav{padding:20px 20px}
+            nav.scrolled{padding:15px 20px}
+            .nav-links{display:none}
+            .menu-toggle{display:flex}
+            .page-hero{padding:130px 20px 60px}
+            .page-title{font-size:2.8rem}
+            .hero-orb{display:none}
+            .grid-overlay{display:none}
+            .content-section{padding:50px 20px}
+            .section-heading h2{font-size:2.2rem}
+            .option-cards{grid-template-columns:1fr;gap:22px}
+            .timeline{padding-left:30px}.timeline::before{left:10px}.timeline-dot{left:-29px;width:16px;height:16px}
+            .cta-content h2{font-size:2rem}
+            .btn-primary:hover{transform:none}
+            .btn-primary:hover::before{left:-100%}
+        }
+        @media(max-width:400px){
+            .page-title{font-size:2.2rem}
+            .mobile-menu a{font-size:1rem;letter-spacing:3px}
+        }
+    </style>
+</head>
+<body>
+
+    <div class="preloader" id="preloader">
+        <div class="preloader-logo">TLor</div>
+        <div class="preloader-line"><div class="preloader-progress"></div></div>
+        <p class="preloader-text">Loading Delivery & Pickup</p>
+    </div>
+
+    <nav id="navbar">
+        <a href="index.html" class="nav-logo">TLor</a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="collections.html">Collections</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="index.html">Home</a>
+        <a href="collections.html">Collections</a>
+        <a href="contact.html">Contact</a>
+    </div>
+
+    <section class="page-hero">
+        <div class="page-hero-bg">
+            <div class="hero-orb hero-orb-1"></div>
+            <div class="hero-orb hero-orb-2"></div>
+            <div class="grid-overlay"></div>
+        </div>
+        <div class="page-hero-content">
+            <span class="page-tag">How It Works</span>
+            <h1 class="page-title">Delivery & Pickup</h1>
+            <p class="page-subtitle">We bring your fragrances right to your doorstep — or come grab them yourself.</p>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="section-inner">
+            <div class="section-heading">
+                <span class="page-tag">Choose Your Way</span>
+                <h2>Two Ways to Get Your Order</h2>
+                <p>Simple, flexible options that work for you</p>
+            </div>
+            <div class="option-cards">
+                <div class="option-card">
+                    <span class="option-icon">🛵</span>
+                    <h3>Home Delivery</h3>
+                    <p>We deliver directly to your address. Our rider will call you before arriving, and you pay when they get there — product price plus delivery fee.</p>
+                    <ul class="option-details">
+                        <li><span class="check">✓</span> Same-day delivery for orders placed early</li>
+                        <li><span class="check">✓</span> Rider calls you 30 minutes before arrival</li>
+                        <li><span class="check">✓</span> Cash on delivery — no advance payment needed</li>
+                        <li><span class="check">✓</span> All orders handled safely and properly</li>
+                        <li><span class="check">✓</span> We cover Freetown and surrounding areas</li>
+                    </ul>
+                </div>
+                <div class="option-card">
+                    <span class="option-icon">🏪</span>
+                    <h3>Store Pickup</h3>
+                    <p>Place your order on WhatsApp, then come pick it up at our location when it's ready. No delivery fee at all — just the product price.</p>
+                    <ul class="option-details">
+                        <li><span class="check">✓</span> Order via WhatsApp anytime</li>
+                        <li><span class="check">✓</span> Ready within 1–2 hours</li>
+                        <li><span class="check">✓</span> We'll notify you when it's packed</li>
+                        <li><span class="check">✓</span> Pay when you pick up</li>
+                        <li><span class="check">✓</span> Open and inspect before paying</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="section-inner">
+            <div class="fee-notice">
+                <p>🚚 <strong>The delivery fee depends on your location</strong>, and we'll call to confirm the exact amount before sending out your order. You'll always know the full cost before anything leaves our store.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="section-inner">
+            <div class="section-heading">
+                <span class="page-tag">Step by Step</span>
+                <h2>How Delivery Works</h2>
+                <p>From order to your doorstep — simple and transparent</p>
+            </div>
+            <div class="timeline">
+                <div class="timeline-step">
+                    <div class="timeline-dot"></div>
+                    <h4>Place Your Order</h4>
+                    <p>Browse our collections, add items to cart, fill in your name, phone number, and delivery address, then hit "Send Order via WhatsApp." That's it — your order lands straight in our inbox.</p>
+                    <span class="time-badge">⚡ Takes 2 minutes</span>
+                </div>
+                <div class="timeline-step">
+                    <div class="timeline-dot"></div>
+                    <h4>We Call to Confirm</h4>
+                    <p>We'll review your order and call you to confirm availability, your delivery fee based on your location, and an estimated arrival time. We never send anything without you knowing the full cost first.</p>
+                    <span class="time-badge">📞 Within 30 minutes</span>
+                </div>
+                <div class="timeline-step">
+                    <div class="timeline-dot"></div>
+                    <h4>We Pack & Dispatch</h4>
+                    <p>Once you confirm, we pack your order carefully to make sure everything arrives safely. Then it's handed to our rider who will call you 20–30 minutes before arriving.</p>
+                    <span class="time-badge">🛵 On the way</span>
+                </div>
+                <div class="timeline-step">
+                    <div class="timeline-dot"></div>
+                    <h4>Receive & Pay</h4>
+                    <p>When the rider arrives, open the package and inspect your items. Once you're satisfied, pay the total — product price plus delivery fee — in cash. No hidden charges, no surprises.</p>
+                    <span class="time-badge">💵 Cash on delivery</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="section-inner">
+            <div class="notice-box">
+                <span class="notice-icon">⚠️</span>
+                <div>
+                    <h4>Before You Order</h4>
+                    <p>Please make sure your phone number is correct and reachable — we will call to confirm every order. If we can't reach you within 2 hours, the order may be placed on hold. For store pickup, bring a valid ID matching the name on your order. All sales are final once payment is made and package is accepted.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="section-inner">
+            <div class="section-heading">
+                <span class="page-tag">Common Questions</span>
+                <h2>Frequently Asked</h2>
+                <p>Quick answers to the things people ask most</p>
+            </div>
+            <div class="faq-list" id="faqList">
+                <div class="faq-item">
+                    <div class="faq-question"><h4>How much is delivery?</h4><span class="faq-arrow">▼</span></div>
+                    <div class="faq-answer"><div class="faq-answer-inner">The delivery fee depends on your location. When you place an order, we'll call you to confirm your address and tell you the exact delivery fee before we send anything out. You'll always know the full cost upfront.</div></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question"><h4>Do I pay before delivery?</h4><span class="faq-arrow">▼</span></div>
+                    <div class="faq-answer"><div class="faq-answer-inner">No. You pay cash on delivery — both the product price and the delivery fee together when the rider arrives. We don't ask for mobile money or bank transfer upfront.</div></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question"><h4>How long does delivery take?</h4><span class="faq-arrow">▼</span></div>
+                    <div class="faq-answer"><div class="faq-answer-inner">Most orders within Freetown are delivered the same day if placed early enough. We'll give you an estimated time when we call to confirm. Orders placed late in the day may arrive the next day.</div></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question"><h4>What if I'm not home when the rider comes?</h4><span class="faq-arrow">▼</span></div>
+                    <div class="faq-answer"><div class="faq-answer-inner">The rider will call you before arriving. If you're not available, we can reschedule for another time or day at no extra cost. If we can't reach you after multiple attempts, the order will be held for up to 1 hours before being cancelled.</div></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question"><h4>Will my perfume arrive safely?</h4><span class="faq-arrow">▼</span></div>
+                    <div class="faq-answer"><div class="faq-answer-inner">Yes. We handle every order with care to make sure your perfume arrives in perfect condition. Glass bottles are handled properly and packed securely. If anything arrives damaged, contact us immediately and we'll sort it out.</div></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question"><h4>Can I return or exchange after delivery?</h4><span class="faq-arrow">▼</span></div>
+                    <div class="faq-answer"><div class="faq-answer-inner">Because perfumes are personal and hygiene-sensitive, we don't accept returns once the package is opened and payment is made. However, if the wrong item was delivered or something arrived damaged, contact us immediately on WhatsApp and we'll sort it out.</div></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question"><h4>Do you deliver outside Freetown?</h4><span class="faq-arrow">▼</span></div>
+                    <div class="faq-answer"><div class="faq-answer-inner">Yes, we can arrange delivery to other parts of Sierra Leone. Delivery fees and times will vary and will be confirmed over the phone before we dispatch. Just include your full address when ordering and we'll work it out.</div></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question"><h4>Can someone else receive my order?</h4><span class="faq-arrow">▼</span></div>
+                    <div class="faq-answer"><div class="faq-answer-inner">Yes, as long as the person has the cash ready and can confirm the order details (name and phone number). Just let us know when we call to confirm that someone else will be receiving it.</div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-banner">
+        <div class="cta-banner-bg"></div>
+        <div class="cta-content">
+            <h2>Ready to Order?</h2>
+            <p>Browse our collection and place your first order. We'll handle the rest.</p>
+            <a href="collections.html" class="btn-primary">Shop Now <span>→</span></a>
+        </div>
+    </section>
+
+    <footer class="minimal-footer">
+        <p class="copyright">© 2026 TLor Luxury Fragrances. All rights reserved. Sierra Leone.</p>
+    </footer>
+
+    <script>
+    document.addEventListener('contextmenu',function(e){e.preventDefault()});
+    document.addEventListener('keydown',function(e){
+        if(e.key==='F12'){e.preventDefault();return}
+        if(e.ctrlKey&&e.shiftKey&&(e.key==='I'||e.key==='i'||e.key==='J'||e.key==='j'||e.key==='C'||e.key==='c')){e.preventDefault();return}
+        if(e.ctrlKey&&(e.key==='u'||e.key==='U'||e.key==='s'||e.key==='S')){e.preventDefault();return}
+    });
+
+    !function(){
+        window.addEventListener('load',function(){
+            setTimeout(function(){document.getElementById('preloader').classList.add('fade-out')},1200);
+        });
+
+        var nb=document.getElementById('navbar');
+        var navScrolled=false;
+        window.addEventListener('scroll',function(){
+            var shouldScroll=window.scrollY>60;
+            if(shouldScroll!==navScrolled){
+                navScrolled=shouldScroll;
+                if(shouldScroll){nb.classList.add('scrolled')}
+                else{nb.classList.remove('scrolled')}
+            }
+        },{passive:true});
+
+        var mt=document.getElementById('menuToggle');
+        var mm=document.getElementById('mobileMenu');
+        if(mt&&mm){
+            mt.addEventListener('click',function(){
+                var isOpen=mm.classList.toggle('open');
+                mt.classList.toggle('active',isOpen);
+                document.body.style.overflow=isOpen?'hidden':'';
+            });
+            mm.querySelectorAll('a').forEach(function(l){
+                l.addEventListener('click',function(){
+                    mm.classList.remove('open');
+                    mt.classList.remove('active');
+                    document.body.style.overflow='';
+                });
+            });
+            document.addEventListener('keydown',function(e){
+                if(e.key==='Escape'&&mm.classList.contains('open')){
+                    mm.classList.remove('open');
+                    mt.classList.remove('active');
+                    document.body.style.overflow='';
+                }
+            });
+        }
+
+        document.querySelectorAll('.faq-question').forEach(function(q){
+            q.addEventListener('click',function(){
+                var item=this.closest('.faq-item'),
+                    ans=item.querySelector('.faq-answer'),
+                    inner=ans.querySelector('.faq-answer-inner'),
+                    wasOpen=item.classList.contains('open');
+                document.querySelectorAll('.faq-item.open').forEach(function(o){
+                    o.classList.remove('open');
+                    o.querySelector('.faq-answer').style.maxHeight='0';
+                });
+                if(!wasOpen){
+                    item.classList.add('open');
+                    ans.style.maxHeight=inner.scrollHeight+20+'px';
+                }
+            });
+        });
+
+        /* Scroll reveal — DESKTOP ONLY */
+        if(!window.matchMedia('(max-width:768px)').matches){
+            var obs=new IntersectionObserver(function(entries){
+                entries.forEach(function(e){
+                    if(e.isIntersecting){
+                        e.target.style.opacity='1';
+                        e.target.style.transform='translateY(0)';
+                    }
+                });
+            },{threshold:0.1,rootMargin:'0px 0px -30px 0px'});
+            var i=0;
+            document.querySelectorAll('.option-card,.fee-notice,.timeline-step,.faq-item,.notice-box,.cta-content').forEach(function(el){
+                el.style.opacity='0';
+                el.style.transform='translateY(30px)';
+                el.style.transition='all 0.7s cubic-bezier(0.23,1,0.32,1) '+(i*0.08)+'s';
+                obs.observe(el);
+                i++;
+            });
+        }
+    }();
+    </script>
+</body>
+</html>
